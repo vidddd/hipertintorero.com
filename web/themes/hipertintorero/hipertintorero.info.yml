@@ -1,0 +1,22 @@
+name: hipertintorero
+type: theme
+description: 'Thema de hipertintorero.com 2'
+version: 1.0
+core: 8.x
+regions:
+  header: Header
+  page_top: 'Page Top'
+  primary_menu: 'Primary Menu'
+  secondary_menu: 'Secondary Menu'
+  content: Content
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
+  footer: 'Footer'
+  suscribe: 'Suscribe'
+  sub_content: 'Sub Content'
+ 
+libraries:
+  - 'hipertintorero/global-styling'
+
+libraries-override:
+  system/base: false

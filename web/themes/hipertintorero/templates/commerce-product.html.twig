@@ -1,0 +1,82 @@
+{#
+/**
+ * @file
+ *BEGIN OUTPUT from 'modules/contrib/commerce/modules/product/templates/commerce-product.html.twig'
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set product_image = product.field_images %}
+{% set base_url = render_var(url('<front>'))  %}
+  {% set url2 = render_var(product_url)  %}
+{% set url = base_url|trim('/', 'right')~url2  %}
+
+<article class="page-single-product">
+<div class="col-sm-6">
+  <div class="images-product">
+      {% for img in product_image['#items'] %}
+           <img class="attachment-shop-single imagen{{ loop.index }}" src="{{ file_url(img.entity.uri.value) }}" {% if loop.index != 1 %}style="display:none;"{% endif %} rel="{{ loop.index }}" alt="{{ img.alt }}">
+      {% endfor %}
+        {% for img in product_image['#items'] %}
+            <a class="thumblink" href="#" rel="{{ loop.index }}"><img class="img-thumbnail" src="{{ file_url(img.entity.uri.value)}}" alt="{{ img.alt }}"></a>
+        {% endfor %}
+  </div>
+</div>
+<div class="col-sm-6">
+  <h1 class="product-title">{{ product.title }}</h1>
+  <div class="price"><span class="amount">{{ product.variation_price }}</span></div>
+  <div class="description">
+    {{ product.field_descripcion_corta }}
+  </div>
+  <hr>{{ product.variations }}
+  <div class="product-meta">
+    <span>categoria:
+      {{ product.field_category }}
+    </span>
+    {% if product.filed_tags %}<span>tags:
+      {{ product.field_tags }}
+    </span>{% endif %}
+  </div>
+  <div class="product-share-buttons">
+      <div class="social">
+      <a title="Compartir en Facebook" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank"><i class="fa fa-facebook"></i></a>
+      <a title="Compartir en twitter" class="twitter" href="https://twitter.com/home?status={{ url }}" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a title="Compartir en Google plus" class="gplus" href="https://plus.google.com/share?url={{ url }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+      <a title="Compartir en pinterest" class="pinterest" href="https://pinterest.com/pin/create/button/?url={{ url }}" target="_blank"><i class="fa fa-pinterest"></i></a>
+       {# <a title="enviar por email" class="paper-plane" href="{{ product_url }}" target="_blank"><i class="fa fa-send"></i></a>  #}
+      <a title="Compartir en linkedin" class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ url }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+      <a title="Compartir en Whatsapp" class="whatsapp" href="https://wa.me/whatsappphonenumber/?text={{ url }}" target="_blank"><i class="fa fa-whatsapp"></i></a>
+    </div>
+  </div>
+  {% if product.body|render %}
+  <div class="panel-group accordion-rn" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Descripcion
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+          {{ product.body }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+</article>

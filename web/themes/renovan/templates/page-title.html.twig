@@ -1,0 +1,55 @@
+{% if node.field_page_title_format.0.value %}
+        {% set page_title_format = node.field_page_title_format.0.value%}
+{% else %}
+        {% set page_title_format = page_title_format %}
+{% endif %}
+
+{% if page_title_format == '' %}
+        {% set page_title_format = 'color-bg'%}
+{% endif %}
+
+{%if node.field_background_image.0.entity.uri.value %}
+    {% set oneimage = node.field_background_image.0.entity.uri.value %}
+    {% set oneimage =   file_url(oneimage) %}
+{% else %}
+    {% set oneimage = header_bg_image %}
+{% endif %}
+    
+
+{% if page_title_format == 'big_image' and oneimage !='' %}
+    <div class="page-title big-image-bg">
+    <section class="big-title" data-parallax="scroll" data-image-src="{{oneimage}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% elseif page_title_format == 'image' and oneimage !=''%}
+    <div class="page-title image-bg">
+    <section class="big-title" data-parallax="scroll" data-image-src="{{oneimage}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% else %}
+<div class="page-title single-color-bg">
+    <section class="big-title" >
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endif %}

@@ -1,0 +1,11 @@
+tintorero.admin:
+  title: 'Hiper Tintorero'
+  route_name: tintorero.admin
+  description: 'Administrar cosas de hipertintorero.com'
+  parent: system.admin_config
+  
+tintorero.configuracion:
+  title: 'Configuracion'
+  route_name: tintorero.configuracion
+  description: 'Configuraciones generales.'
+  parent: tintorero.admin

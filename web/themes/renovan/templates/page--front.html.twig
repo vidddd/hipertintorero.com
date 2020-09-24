@@ -1,0 +1,17 @@
+
+{% include theme_path ~ "/templates/header.html.twig" %}
+
+       {% if page.slider %}
+            {{ page.slider }}
+        {% endif %}
+        
+    {% if page.content %}
+        {{ page.content }}
+    {% endif %}
+
+<!-- /.we-are-layout1 -->
+    {% if page.section %}
+        {{ page.section }}
+    {% endif %}
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

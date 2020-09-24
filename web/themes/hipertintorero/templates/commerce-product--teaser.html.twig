@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ *from 'modules/contrib/commerce/modules/product/templates/commerce-product.html.twig'
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ * @ingroup themeable
+ */
+#}
+{% set titulo = product.title %}
+<div class="col-sm-6 col-md-4 product">
+  <div class="product-thumb">
+    <a href="{{ product_url }}" class="product-thumb_link">
+      <img src="{{ file_url(product.field_images['#items'].entity.uri.value) }}" alt="" />
+    </a>
+    <!-- <a href="#" class="btn cart-button">Al Carro</a>  -->
+
+  </div>
+  <h3><a href="{{ product_url }}" title="Detalle de {# titulo #}" class="product-title">{{ titulo }}</a></h3>
+  <div class="price">
+      <span class="amount">{{ product.variation_price }}</span>
+  </div>
+</div>

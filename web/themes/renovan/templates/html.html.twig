@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% set class = [
+layout_class,page_class,
+]%}
+<html{{ html_attributes.addClass(class) }}>
+  <!--<![endif]-->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <head-placeholder token="{{ placeholder_token|raw }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token|raw }}">
+    <js-placeholder token="{{ placeholder_token|raw }}">
+    {% if general_setting_tracking_code != '' %}
+      {{ general_setting_tracking_code|t }}
+    {% endif %}
+    {% if custom_css != '' %}
+      <style type="text/css" media="all">
+        {{ custom_css|t }}
+      </style>
+    {% endif %}
+</head>
+<body{{ attributes }}>
+    <a href="#main-content" class="visually-hidden focusable">
+      {{ 'Skip to main content'|t }}
+    </a>
+    <div class="site">
+
+      {{ page_top }}
+      {{ page }}
+      {{ page_bottom }}
+    </div>
+  
+  <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+</body>
+</html>

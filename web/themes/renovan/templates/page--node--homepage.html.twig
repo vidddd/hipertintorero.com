@@ -1,0 +1,19 @@
+
+ {% include theme_path ~ "/templates/header.html.twig" %}
+ 
+
+        {% if page.slider %}
+            {{ page.slider }}
+        {% endif %}
+
+        {% if page.section %}
+            {{ page.section }}
+        {% endif %}
+
+        
+        {% if page.content %}
+            {{ page.content }}
+        {% endif %}   
+
+    {% include theme_path ~ "/templates/footer.html.twig" %}               
+

@@ -1,0 +1,10 @@
+name: Hiper Tintorero Migrate
+description: Migracion a Drupal Commerce de Hipertintorero.COM
+package: Custom
+type: module
+version: 1.0
+core: 8.x
+dependencies:
+  - migrate_source_csv
+  - migrate_plus
+  - migrate_tools

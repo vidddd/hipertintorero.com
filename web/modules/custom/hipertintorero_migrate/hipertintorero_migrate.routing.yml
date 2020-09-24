@@ -1,0 +1,7 @@
+hipertintorero_migrate.content:
+  path: '/hipertintorero'
+  defaults:
+    _controller: '\Drupal\hipertintorero_migrate\Controller\HiperController::content'
+    _title: 'Hiper Tintorero Migrate'
+  requirements:
+    _permission: 'access content'

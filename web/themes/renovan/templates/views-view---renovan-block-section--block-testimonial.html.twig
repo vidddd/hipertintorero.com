@@ -1,0 +1,20 @@
+{% if rows %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                
+                {% if header %}
+                    {{ header }}
+                {% endif %}            
+                
+                <div class="testi-owl owl-carousel">
+                    
+                    {% for row in rows %}
+                        {{ row }}
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

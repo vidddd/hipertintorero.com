@@ -1,0 +1,11 @@
+{% if rows %}
+    <div class="textwidget">
+        <div class="recent-posts">
+            {% for row in rows %}
+                {{ row }}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endif %}
+

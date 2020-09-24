@@ -1,0 +1,267 @@
+{% if node.field_header_style.0.value %}
+    {% set header_style = node.field_header_style.0.value%}
+{% else %}
+    {% set header_style = header_style %}
+{% endif %}
+
+{% if header_style == ''%}
+    {% set header_style ='page-home01'%}
+{% endif %}
+
+
+
+{% if header_style == 'page-home01' %}  
+    
+    {% if page.left_pre_header or page.left_pre_header %}
+        <div class="site-top style-01">
+          <div class="container">
+            <div class="row row-sm-center">
+
+              <div class="col-sm-5 col-md-6">
+                {% if page.left_pre_header %}
+                    {{page.left_pre_header}}
+                {% endif %}
+              </div>
+
+              <div class="col-sm-7 col-md-6">
+                {% if page.right_pre_header %}
+                    {{page.right_pre_header}}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+<!-- /.site-top .style-01 -->
+
+<header class="site-header style-01">
+  <div class="container">
+    <div class="row row-xs-center">
+        <div class="col-xs-10 col-lg-2 site-branding">
+        {% if page.logo %}
+            {{ page.logo }}
+        {% endif %}
+        </div>
+      <div class="col-xs-2 hidden-lg-up text-right">
+        <a id="menu-button" href="#primary-menu-mobile"><i id="open-left" class="fa fa-bars"></i></a>
+            {% if page.menu_mobile%}
+                {{ page.menu_mobile}}
+            {% endif %} 
+      </div>
+      <!-- / Menu Mobile -->
+
+      <div class="col-xs-12 col-sm-9 col-lg-8 extra-info">
+         {% if page.header %}
+                {{ page.header }}
+            {% endif %} 
+      </div>
+      <!-- /.extra-info -->
+
+      <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right search-cart">
+        {% if page.search %}
+            <div class="search-box">
+            {{ page.search }}
+            <span class="search-box-icon"><i class="fa fa-search"></i></span>
+            </div>
+        {% endif %} 
+        {% if page.cart %}
+            <div class="mini-cart">
+            <div class="mini-cart__button">
+                <i class="fa fa-shopping-cart mini-cart-icon" ></i>
+            </div>
+            {{ page.cart }}
+            </div>
+        {% endif %}
+      </div>
+      <!-- / .search-cart -->
+
+    </div>
+  </div>
+   {% if social_networks !='' %}
+        <div class="social-menu social-menu_right-arrow hidden-md-down">
+          {{ social_networks|t }}
+        </div>
+  {% endif %}
+
+  <!-- /.social-menu -->
+
+</header>
+<!-- /.site-header .style-01 -->
+
+<nav id="primary-menu" class="primary-menu_style-01 hidden-md-down">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% if page.main_menu%}
+            {{ page.main_menu}}
+        {% endif %}     
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- /.primary-menu -->
+
+{% elseif header_style == 'page-home02'%}
+    {% if page.left_pre_header or page.left_pre_header %}
+        <div class="site-top style-02">
+            <div class="container">
+                <div class="row row-sm-center">
+
+                    <div class="col-sm-5 col-md-6 hidden-xs-down">
+                        {% if page.left_pre_header%}
+                            {{page.left_pre_header}}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-sm-7 col-md-6">
+                       {% if page.right_pre_header %}
+                           {{ page.right_pre_header }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- /.site-top .style-02 -->
+
+    <header class="site-header style-02">
+        <div class="container">
+            <div class="row row-xs-center">
+                <div class="col-xs-10 col-lg-2 site-branding">
+                    {% if page.logo %}
+                        {{ page.logo }}
+                    {% endif %}
+                </div>
+                <div class="col-xs-2 hidden-lg-up text-right">
+                    <a id="menu-button" href="#primary-menu-mobile"><i id="open-left" class="fa fa-bars"></i></a>
+                        {% if page.menu_mobile%}
+                            {{ page.menu_mobile}}
+                        {% endif %} 
+                </div>
+                <!-- / Menu Mobile -->
+
+                <div class="col-xs-12 col-sm-9 col-lg-8 extra-info">
+                     {% if page.header %}
+                          {{ page.header }}
+                     {% endif %} 
+                </div>
+                <!-- /.extra-info -->
+
+                <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right search-cart">
+                     {% if page.search %}
+                         <div class="search-box">
+                          {{ page.search }}
+                          <span class="search-box-icon"><i class="fa fa-search"></i></span>
+                         </div>
+                     {% endif %} 
+                     {% if page.cart %}
+                         <div class="mini-cart">
+                         <div class="mini-cart__button">
+                               <i class="fa fa-shopping-cart mini-cart-icon" ></i>
+                         </div>
+                         {{ page.cart }}
+                         </div>
+                      {% endif %}
+                </div>
+                <!-- / .search-cart -->
+
+            </div>
+        </div>
+
+    </header>
+    <!-- /.site-header .style-02 -->
+
+    <nav id="primary-menu" class="primary-menu_style-02 hidden-md-down">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if page.main_menu%}
+                        {{ page.main_menu}}
+                    {% endif %} 
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- /.primary-menu -->
+{% else %}
+    {% if page.left_pre_header or page.left_pre_header %} 
+        <div class="site-top style-03">
+            <div class="container">
+                <div class="row row-xs-center">
+                    <div class="col-xs-12 col-md-9">
+                        {% if page.left_pre_header%}
+                            {{ page.left_pre_header }}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3 hidden-sm-down">
+                        {% if page.right_pre_header%}
+                            {{ page.right_pre_header }}
+                        {% endif %}
+                        <!-- /.social-menu -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- /.site-top .style-02 -->
+
+
+    <header class="site-header style-03">
+        <div class="container">
+            <div class="row row-xs-center">
+                <div class="col-xs-10 col-sm-8 col-lg-2 site-branding">
+                {% if page.logo %}
+                    {{ page.logo }}
+                {% endif %}
+                </div>
+                <div class="col-xs-12 col-sm-2 col-lg-8 hidden-md-down">
+                    <nav id="primary-menu" class="primary-menu_style-03">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% if page.secondary_menu%}
+                                        {{ page.secondary_menu}}
+                                    {% endif %} 
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- /.primary-menu -->
+                </div>
+
+                <div class="col-xs-2 col-sm-last hidden-lg-up text-right">
+                    <a id="menu-button" href="#primary-menu-mobile"><i id="open-left" class="fa fa-bars"></i></a>
+                        {% if page.menu_mobile%}
+                            {{ page.menu_mobile}}
+                        {% endif %} 
+                </div>
+                <!-- / Menu Mobile -->
+
+                <div class="col-xs-12 col-sm-2 col-lg-2 text-xs-center text-sm-right search-cart">
+                    {% if page.search %}
+                        <div class="search-box">
+                        {{ page.search }}
+                        <span class="search-box-icon"><i class="fa fa-search"></i></span>
+                        </div>
+                    {% endif %} 
+                    <!-- /.search-box -->
+
+                     {% if page.cart %}
+                         <div class="mini-cart">
+                         <div class="mini-cart__button">
+                               <i class="fa fa-shopping-cart mini-cart-icon" ></i>
+                         </div>
+                         {{ page.cart }}
+                         </div>
+                      {% endif %}
+                    <!-- .mini-cart -->
+                </div>
+                <!-- / .search-cart -->
+
+            </div>
+        </div>
+
+    </header>
+    <!-- /.site-header .style-03 -->
+{% endif %}

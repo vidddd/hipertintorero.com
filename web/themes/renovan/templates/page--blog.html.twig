@@ -1,0 +1,91 @@
+{% if node.field_sidebar.0.value %}
+    {% set sidebar = node.field_sidebar.0.value%}
+{% else %}
+    {% set sidebar = blog_sidebar %}
+{% endif %}
+
+{% if sidebar == '' %}
+{% set sidebar = 'right'%}
+{% endif %}
+ 
+{% if blog_style ==''%}
+    {% set blog_style= 'simple'%}
+{% endif %}
+
+{% if blog_style == 'post-list' %}
+    {% set addclass = 'page-blog-list' %}
+{% elseif blog_style == 'simple' %}
+    {% set addclass = 'page-blog-simple'%}
+{% else %}
+    {% set addclass = 'page-blog-grid'%}
+{% endif %}
+
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+{# page style: left, right, center#}
+<!-- end Header -->
+
+<div class="container">
+    {% if  blog_style == 'simple'%}
+        <div class=" post-simple-layout">
+            {% if page.content %}
+              {{ page.content }}
+            {% endif %}
+        </div>
+        
+    {% else %}
+         <div class="row">
+        {% if sidebar=='right'%}
+            <div class="col-sm-8 col-md-9">
+            {% if  blog_style == 'post-list'%}
+                <div class="post-list-layout">
+                    {% if page.content %}
+                      {{ page.content }}
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="post-grid-layout">
+                    {% if page.content %}
+                        {{ page.content }}
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+            <div class="col-sm-4 col-md-3">
+                {% if page.sidebar %}
+                   {{ page.sidebar }}
+               {% endif %} 
+            </div>
+        {%else%}
+                <div class="col-sm-4 col-md-3">
+                   {% if page.sidebar %}
+                        {{ page.sidebar }}
+                   {% endif %} 
+                </div>  
+             <div class="col-sm-8 col-md-9">
+            {% if  blog_style == 'post-list'%}
+                <div class="post-list-layout">
+                    {% if page.content %}
+                      {{ page.content }}
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="post-grid-layout">
+                    {% if page.content %}
+                       {{ page.content }}
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+     
+            
+         {% endif %}
+    </div>
+    {% endif %}
+</div>
+    {% if page.section %}
+       {{ page.section }}
+    {% endif %} 
+
+{% include theme_path ~ "/templates/footer.html.twig" %}               
+

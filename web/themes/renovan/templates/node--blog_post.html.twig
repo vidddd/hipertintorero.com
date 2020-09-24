@@ -1,0 +1,157 @@
+{% set term_machine_name = current_term.vid.value.0.target_id %}
+    
+{%if node.field_image.0.entity.uri.value %}
+    {% set oneimage=node.field_image.0.entity.uri.value %}
+         {% set alt_image = node.field_image.0.alt%}
+{% else %}
+    {% set oneimage='' %}
+{% endif %}
+    
+    
+{% if not page %}
+
+    {%block nodeheader %}
+        
+        {% if blog_style ==''%}
+           {% set blog_style= 'simple'%}
+        {% endif %}
+        
+        {% if  blog_style == 'post-list'%}
+            
+            <div class="post post-list-item row ">
+                <div class="col-md-4 post-thumb">
+                    <a class="attachment-post-thumb" href="{{url}}"><img src="{{ file_url(oneimage) }}" alt="{{alt_image}}"></a>
+                </div>
+                <div class="col-md-8 post-content">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            <i class="fa fa-clock-o"></i>
+                            {{ node.created.value|date('F d, Y') }}
+                        </span>
+                        <span class="categories-links">
+                            <i class="fa fa-folder-open-o"></i>
+                            {{content.field_blog_tags}}
+                        </span>
+                        <span class="comment-counts">
+                            <i class="fa fa-comments"></i>
+                            {{ node.field_blog_comments.comment_count }}
+                        </span>
+                    </div>      
+                    <div class="entry-header">
+                        <h2 class="entry-title">
+                            <a href="{{url}}">{{node.getTitle}}</a>
+                        </h2>
+                    </div>
+              
+                <div class="entry-content">
+                    <p>{{ node.body.summary|length > 292 ? node.body.summary|slice(0,292) ~ '...' : node.body.summary }}</p>
+                    <a href="{{url}}" class="read-more">{{'read more'|t}}<i class="fa fa-angle-double-right"></i></a>
+                </div>
+                 </div>
+            </div>
+                
+            <!-- /.post-full-item -->
+        {% elseif blog_style == 'simple' %}
+            <div class="col-sm-3 post post-simple-item">
+                <div class="post-thumb">
+                    <a class="attachment-post-thumb" href="{{url}}"><img src="{{ file_url(oneimage) }}" alt="{{alt_image}}"></a>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            <i class="fa fa-clock-o"></i>
+                             {{ node.created.value|date('F d, Y') }}
+                        </span>
+                        <span class="comment-counts">
+                            <i class="fa fa-comments"></i>
+                             {{ node.field_blog_comments.comment_count }}
+                        </span>
+                    </div>
+                </div>
+                <div class="entry-header">
+                    <h2 class="entry-title">
+                        <a href="{{url}}">{{node.getTitle}}</a>
+                    </h2>
+                </div>
+            </div>
+<!-- /.post-simple-item -->            
+        {% else %}
+            
+            <div class="post post-grid-item col-sm-6">
+                <div class="post-thumb">
+                    <a class="attachment-post-thumb" href="{{ url }}"><img src="{{ file_url(oneimage) }}" alt="{{alt_image}}"></a>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            <i class="fa fa-clock-o"></i>
+                           {{ node.created.value|date('F d, Y') }}
+                        </span>
+                        {% if node.field_blog_tags.0.value %}
+                        <span class="categories-links">
+                            <i class="fa fa-folder-open-o"></i>
+                             {{ content.field_blog_tags}}
+                        </span>
+                        {% endif %}
+                        <span class="comment-counts">
+                            <i class="fa fa-comments"></i>
+                            {{ node.field_blog_comments.comment_count }}
+                        </span>
+                    </div>
+                </div>
+                <div class="entry-header">
+                    <h2 class="entry-title">
+                        <a href="{{ url }}">{{node.getTitle}}</a>
+                    </h2>
+                </div>
+                <div class="entry-content">
+                    <p>{{ node.body.summary|length > 292 ? node.body.summary|slice(0,292) ~ '...' : node.body.summary }}</p>
+                    <a href="{{url}}" class="read-more">{{'read more'|t}}<i class="fa fa-angle-double-right"></i></a>
+                </div>
+            </div>
+            <!-- /.post-grid-item -->
+         {% endif %}
+    {% endblock%}
+        
+{% else %}{# single #}
+    
+    <div class="post-single-layout">
+
+               <div class="post post-full-item">
+                   <div class="post-thumb">
+                       <a class="attachment-post-thumb" href="{{ url }}"><img src="{{ file_url(oneimage) }}" alt="{{alt_image}}"></a>
+                       <div class="entry-meta">
+                           <span class="posted-on">
+                               <i class="fa fa-clock-o"></i>
+                                {{ node.created.value|date('F d, Y') }}
+                           </span>
+                           {% if node.field_blog_tags.0.value %}
+                           <span class="categories-links">
+                               <i class="fa fa-folder-open-o"></i>
+                               {{ content.field_blog_tags}}
+                           </span>
+                           {% endif %}
+                           <span class="comment-counts">
+                               <i class="fa fa-comments"></i>
+                              {{ node.field_blog_comments.comment_count }}
+                           </span>
+                       </div>
+                   </div>
+                   <div class="entry-header">
+                       <h2 class="entry-title">
+                           <a href="{{ url }}">{{node.getTitle}}</a>
+                       </h2>
+                   </div>
+                   <div class="entry-content">
+                     {{ content.body }}
+                       <div class="post-share-buttons">
+                           <span>share</span>
+                           <a href="http://www.facebook.com/sharer/sharer.php?u={{ base_root ~ url}}&t={{ title }}"><i class="fa fa-facebook"></i></a>
+                           <a href="https://twitter.com/share?url={{base_root ~ url}}&text={{ title }}"><i class="fa fa-twitter"></i></a>
+                           <a href="https://plus.google.com/share?url={{base_root ~ url}}" target="_blank" title="{{ title }}"><i class="fa fa-google-plus"></i></a>
+                       </div>
+                       <!-- /.post-share-buttons -->
+                   </div>
+               </div>
+               <!-- /.post-full-item -->
+{{content.field_blog_comments}}
+           </div>
+   <!-- /.post-single-layout --> 
+    
+{% endif %}

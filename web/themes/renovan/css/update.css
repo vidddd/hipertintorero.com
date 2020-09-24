@@ -1,0 +1,282 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 8, 2016, 11:20:32 AM
+    Author     : danghuyen
+*/
+.toolbar .toolbar-bar {
+    height: 39px;
+}
+.pager ul, #block-renovan-local-tasks > ul{
+    display: block;
+}
+.pager ul li, #block-renovan-local-tasks > ul > li{
+    display: inline-block;
+}
+#block-renovan-local-tasks > ul > li{
+    padding: 8px;
+}
+#block-renovan-local-tasks{
+    width: 100%;
+}
+#block-renovan-local-tasks > ul{
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+#block-renovan-local-tasks > ul > li a{
+    font-size: 15px   ;
+    color: #2196f3;
+}
+.filters-button-group .button{
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    width: auto;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.parallax-bg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.mega-menu >ul.sub-menu{
+    display: block;
+}
+.mega-menu >ul.sub-menu>li{
+    vertical-align: top;
+    display: inline-block;
+}
+.mega-menu >ul.sub-menu>li>ul{
+    margin-left: 0;
+}
+.padding-top-0{
+    padding-top: 0;
+}
+.padding-top-0 .container{
+    padding-top: 50px;
+}
+.contact-form form{
+    width: 100%;
+}
+.renovan-contact-form{
+    background: #000000;
+}
+.renovan-contact-form label{
+    color: rgba(255, 255, 255, 0.5);
+}
+.contact-form input[type=submit],.contact-form input[type=checkbox]{
+    width: auto;
+}
+.center-title .service-heading{
+    text-align: center;
+}
+.search-cart .search-box form{
+    display: none;
+}
+.search-cart .search-box form input[type=submit]{
+    display: none;
+}
+#block-renovan-content form.uc-cart-checkout-form input[type=text],
+#block-renovan-content form.uc-cart-checkout-form select,#block-renovan-content form.uc-cart-checkout-form input[type=email],
+.user-register-form input[type=email],.user-register-form input[type=text],.user-pass input[type=text]{
+    width: auto;
+}
+
+#block-renovan-content form.search-page-form{
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+}
+/*shopping cart*/
+#block-renovan-content .uc-cart-view-form table{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+#block-renovan-content .uc-cart-view-form table thead{
+    background: #FBD232;
+}
+#block-renovan-content .uc-cart-view-form table > thead:first-child > tr:first-child > th{
+    border-top: 0;
+}
+#block-renovan-content .uc-cart-view-form table thead > tr > th {
+    border-bottom-color: #FBD232;
+    padding: 10px;
+    color: #fff;
+}
+#block-renovan-content .uc-cart-view-form table tbody > tr > td {
+    vertical-align: middle;
+    padding: 8px;
+    line-height: 1.42857143;
+    border-bottom:  1px solid #ddd;
+}
+#block-renovan-content .uc-cart-view-form table img{
+    width: 70px;
+    min-width: 70px;
+    border: 1px solid #eee;
+    padding: 5px;
+
+}
+#block-renovan-content .uc-cart-view-form table .uc-price{
+    color: #d90000;
+    font-weight: 700;
+}
+#block-renovan-content .uc-cart-view-form input[type=submit]{
+    background: #FBD232;
+    font-weight: 700;
+}
+#block-renovan-content .uc-cart-view-form input[type=submit]:hover{
+    color: #fff;
+    background: #111; 
+}
+.pagination{
+    clear: both;
+    width: 100%;
+}
+.pagination li.is-active a{
+    color: rgb(255, 255, 255);
+    background: rgb(17, 17, 17);
+}
+.pagination li.is-active a:before{
+    border-right-color: rgb(17, 17, 17);
+}
+.pagination li.is-active a:after{
+    border-left-color: rgb(17, 17, 17);
+}
+.pager li > a, .pager li > span{
+    border: none;
+    border-radius:0;
+    padding: 0;
+}
+/*blog*/
+.post-list-item:first-of-type .post-thumb,div.contextual + div.post-list-item .post-thumb{
+    flex: 100%;
+    max-width: 100%;
+}
+.post-list-item:first-of-type .post-content,div.contextual + div.post-list-item .post-content{
+    flex: 100%;
+    max-width: 100%;
+    margin-top: -16px;
+}
+.post-list-item:first-of-type,div.contextual + div.post-list-item{
+    margin-left: 0;
+    margin-right: 0;
+}
+.post-grid-layout .post-grid-item.col-sm-6:first-of-type,.post-grid-layout div.contextual + .post-grid-item.col-sm-6{
+    flex:100%;
+    max-width: 100%;
+}
+.page-projects-single .single-image{
+    width: 100%;
+}
+.weight-700{
+    font-weight: 700;
+    font-family: Montserrat;
+}
+.btn-slider a{
+    color:#111 !important;
+    padding: 9px 22px !important;
+    font-weight: 700;
+    font-family: Montserrat;
+}
+.btn-slider a{
+    background-color: rgb(254, 215, 0);
+}
+.btn-slider a:hover{
+    color: white !important;
+}
+.renovan-contact-form .title{
+    color: #fff;
+    font-size: 36px;
+    margin-top: 70px;
+}
+.contact-page .container{
+    max-width: 100%;
+}
+.search-cart  .mini-cart .mini-cart__content{
+    padding: 15px;
+}
+aside.widget-search form input[type=submit]{
+    display: none;
+}
+.menu li a.fa:before, #primary-menu-mobile a.fa:before{
+    margin-right: 5px;
+    font-size: 14px;
+}
+section{
+    position: relative;
+}
+.contact-form .title{
+    margin-bottom: 22px;
+}
+.product .form-item-qty{
+    display: none;
+}
+.views-exposed-form >div{
+    display: inline-block;
+}
+.views-exposed-form{
+    padding-bottom: 36px;
+}
+.views-exposed-form input[type=submit]{
+    vertical-align: top;
+}
+.comment-form .filter-wrapper{
+    display: none;
+}
+.site-maintenance p{
+    color:rgba(51, 39, 39, 0.5);
+}
+.site-maintenance h3 {
+    color: rgb(45, 39, 39);
+}
+@media (max-width: 767px){
+
+    .search-cart .search-box form{
+        top: 24px;
+    }
+}
+.big-image-bg h2{
+    font-size: 50px;
+}
+.page-about.layout-02 .testimonial-2{
+    padding: 0;
+}
+.margin-bottom-60{
+    margin-bottom: 60px;
+}
+.post-single-layout form.comment-form{
+    margin-bottom: 50px;
+}
+aside.widget-search input[type=search]{
+    box-sizing: border-box;
+}
+.page-projects-fullwidth .projects .grid .grid-overlay-wrapper >a{
+    color: white;
+}
+.page-projects-fullwidth .projects .grid .grid-overlay-wrapper >a:hover{
+    color: #FBD232;
+}
+.page-projects-fullwidth .projects .grid .grid-overlay-wrapper >a.grid-overlay-tittle{
+    color: #FBD232;
+}
+.page-projects-sidebar .site-content .content,.page-projects-basic .site-content .content{
+    padding-top: 0;
+}
+.contact-form .form-actions input{
+    margin-right: 12px;
+}
+@media (max-width: 767px){
+    .post-list-layout .post-list-item.row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

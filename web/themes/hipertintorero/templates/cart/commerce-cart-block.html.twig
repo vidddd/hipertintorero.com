@@ -1,0 +1,15 @@
+<div class="mini-cart__button">
+  <i class="fa fa-shopping-cart mini-cart-icon" data-count="{{ count }}"></i>
+</div>
+<div class="mini-cart__content">
+  {% if content %}
+        {{ content }}
+      <div class="cart-block--contents__links">
+        <p class="buttons">
+          <a href="{{ path('commerce_cart.page') }}" class="btn">Ver el Carro</a>
+          <a href="{{ urlpagar }}" class="btn">Pagar</a>
+        </p>
+      
+      </div>
+  {% endif %}
+</div>

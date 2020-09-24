@@ -1,0 +1,24 @@
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+
+   {% if type!= 'page'%}
+        {% if page.content %}
+            <div class="container margin-bottom-60">
+                <div class="container">
+                    <div class="row">
+                    {{ page.content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %} 
+    {% else %}
+        {% if page.content %}
+            {{ page.content }}
+        {% endif %}
+       
+    {% endif%}
+     {% if page.section %}
+            {{ page.section }}
+        {% endif %}
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

@@ -1,0 +1,21 @@
+{% if rows %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 testimonial">
+                {% if header %}
+                    {{ header }}
+                {% endif %}            
+                <div class="testi-owl owl-carousel">
+                    {% for row in rows %}
+                        {{ row }}
+                    {% endfor %}
+                </div>
+            </div>
+            {% if footer%}
+                <div class="col-md-6 brand-2">
+                    {{ footer}}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

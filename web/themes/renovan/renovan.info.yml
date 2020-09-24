@@ -1,0 +1,35 @@
+name: Renovan
+type: theme
+description: ''
+core: 8.x
+screenshot: screenshot.png
+libraries:
+  - renovan/renovan-lib
+stylesheets-remove:
+  - core/themes/stable/css/views/views.module.css
+  - core/themes/stable/css/system/components/align.module.css
+  - core/assets/vendor/normalize-css/normalize.css
+  - core/modules/system/css/system.module.css
+  - core/modules/system/css/system.theme.css
+  - core/modules/views/css/views.module.css
+
+regions:
+  left_pre_header: 'Left pre header'
+  right_pre_header: 'Right pre header'
+  search: 'Header search'
+  cart: 'Shopping cart'
+  top_menu: 'Top menu'
+  logo: 'Logo'
+  header: 'Header'
+  menu_mobile: 'Mobile Menu'
+  main_menu: 'Main menu'
+  secondary_menu: 'Secondary menu'
+  slider: 'Slider'
+  content: 'Main content'
+  sidebar: 'Sidebar'
+  section: 'Section content'
+  footer_column_1: 'Footer column 1'
+  footer_column_2: 'Footer column 2'
+  footer_column_3: 'Footer column 3'
+  footer: 'Footer'
+  map_canvas: 'Map canvas'

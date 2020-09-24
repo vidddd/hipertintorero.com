@@ -1,0 +1,47 @@
+{% set term_machine_name = current_term.vid.value.0.target_id %}
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+
+{% if term_machine_name == 'catalog' or term_machine_name == 'product_tags'%}
+    <div class="container">
+        <div class="row">
+            {% if page.content %}
+                <div class="col-md-12"> 
+                    <div class="products grid-layout">
+                      {{ page.content }}
+                    </div>
+                 </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% elseif term_machine_name == 'project_categories' %}
+    {% if page.content %}
+        <div class="container">
+            <div class="col-sm-12">
+            {{ page.content }}
+            </div>
+        </div>
+    {% endif %}
+{% elseif term_machine_name == 'service_categories' %}
+    {% if page.content %}
+        <div class="container">
+            <div class="col-sm-12">
+            {{ page.content }}
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    {% if page.content %}
+        <div class="container">
+            <div class="col-sm-12">
+            {{ page.content }}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+{% if page.section %}
+    {{ page.section }}
+{% endif %}
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

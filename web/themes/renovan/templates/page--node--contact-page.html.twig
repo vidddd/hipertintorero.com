@@ -1,0 +1,48 @@
+{% if node.field_contact_style.0.value %}
+    {% set style = node.field_contact_style.0.value%}
+{% else %}
+    {% set style = 'style1' %}
+{% endif %}
+
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+{% if style == 'style1'%}
+    {% if page.map_canvas%}
+        {{page.map_canvas}}
+    {% endif %}
+    {% if page.content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-lg-7 message contact-page">
+        {{ page.content }}
+                </div>
+        {% if page.sidebar %}
+            <div class="col-sm-8 col-md-5 col-lg-4 col-lg-offset-1 ">
+            {{ page.sidebar }}
+            </div>
+        {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    
+    <div class="container contact-content">
+        <div class="row">
+            {% if page.sidebar %}
+            <div class="col-md-4">
+                {{ page.sidebar }}
+            </div>
+            {% endif%}
+            {% if page.content %}
+            <div class="col-md-8 contact-page">
+                {{ page.content }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+    {% if page.section %}
+        {{ page.section }}
+    {% endif %}
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

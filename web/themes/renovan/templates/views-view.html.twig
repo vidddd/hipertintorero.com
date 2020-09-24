@@ -1,0 +1,144 @@
+
+{% if id == '_renovan_block_content' %}
+    {% if rows %}  
+        
+             {% if header %}     
+                {{ header }}
+             {% endif %}
+
+        <div{{ attributes.addClass(classes) }}>
+            <div class="container">
+                <div class="row">
+                {{ title_prefix }}
+                {{ title }}
+                {{ title_suffix }}
+
+                {{ exposed }}
+                {{ attachment_before }}
+                    {% for row in rows %}
+                        {{ row }}
+                    {% endfor %}
+                </div>
+            </div>
+
+                {% if footer %}
+                    {{ footer }}
+                {% endif %}
+                {% if pager %}
+                <div class="pagination">
+                    {{ pager }}
+                </div>
+                {% endif %}
+                {{ attachment_after }}
+                {{ more }}
+
+                {{ feed_icons }}
+        </div>
+    {% endif %}
+{% elseif id == 'taxonomy_term' %}
+
+ {% if header %}     
+    {{ header }}
+ {% endif %}
+
+    
+    {{ attachment_before }}
+  
+    {% if rows %}  
+          <div class="row">
+        {% for row in rows %}
+            {{ row }}
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% if footer %}
+        {{ footer }}
+    {% endif %}
+    {% if pager %}
+    <div class="pagination">
+        {{ pager }}
+    </div>
+    {% endif %}
+    {{ attachment_after }}
+    {{ more }}
+
+    {{ feed_icons }}
+
+{% elseif id == '_renovan_block_section' %}
+
+    <div class="container">
+        {{ title_prefix }}
+        {{ title }}
+        {{ title_suffix }}
+
+     {% if header %}     
+        {{ header }}
+     {% endif %}
+
+        {{ exposed }}
+        {{ attachment_before }}
+
+        {% if rows %}  
+        <div{{ attributes.addClass(classes) }}>
+            {% for row in rows %}
+                {{ row }}
+            {% endfor %}
+         </div>
+        {% endif %}
+        {% if footer %}
+            {{ footer }}
+        {% endif %}
+        {% if pager %}
+        <div class="pagination">
+            {{ pager }}
+        </div>
+        {% endif %}
+        {{ attachment_after }}
+        {{ more }}
+
+        {{ feed_icons }}
+
+    </div>
+{% else %}
+{%
+  set classes = [
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+<div class="row ">
+    <div class="col-sm-6 sm-end">
+    {{ exposed }}
+    </div>
+</div>
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {{ title_suffix }}
+    
+ {% if header %}     
+    {{ header }}
+ {% endif %}
+
+    
+    {{ attachment_before }}
+  
+    {% if rows %}  
+        
+        {% for row in rows %}
+            {{ row }}
+        {% endfor %}
+    {% endif %}
+    {% if footer %}
+        {{ footer }}
+    {% endif %}
+    {% if pager %}
+    <div class="pagination">
+        {{ pager }}
+    </div>
+    {% endif %}
+    {{ attachment_after }}
+    {{ more }}
+
+    {{ feed_icons }}
+</div>
+{% endif %}

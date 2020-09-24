@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Bartik's theme implementation to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ *
+ * @see template_preprocess_maintenance_page()
+ */
+ #}
+<section class="site-maintenance">
+  <div class="site-maintenance_content text-center">
+    <div class="container">
+      <h2>{{site_name}}</h2>
+      <h3> {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}</h3>
+        {% if social_networks !='' %}
+          {{ social_networks|t }}
+        {% endif %}
+      <p>  {{ page.content }}</p>
+    
+    </div>
+  </div>
+</section>
+

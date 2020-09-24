@@ -1,0 +1,42 @@
+renovan-lib:
+  version: VERSION
+  css:
+    theme:
+      fonts/icon-7/css/pe-icon-7-stroke.css: {}
+      fonts/icon-7/css/helper.css: {}
+      fonts/renovan/icon-font.css: {}
+      https://fonts.googleapis.com/css?family=Montserrat:400,700: {}
+      https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic: {}
+      components/mmenu/jquery.mmenu.all.css: {}
+      components/font-awesome/css/font-awesome.css: {}
+      components/owl.carousel/assets/owl.carousel.css: {}
+      components/lightgallery/css/lightgallery.css: {}
+      components/bootstrap/css/bootstrap.css: {}
+      components/slider/slider.css: {}
+      css/main.css: {}
+      css/update.css: {}
+  js:
+    https://maps.google.com/maps/api/js: {}
+    components/jquery/jquery.js: {}
+    components/bootstrap/js/bootstrap.js: {}
+    components/owl.carousel/owl.carousel.js: {}
+    components/parallax.js/parallax.js: {}
+    components/scrollup/jquery.scrollUp.js: {}
+    components/lightgallery/js/lightgallery.js: {}
+    components/mmenu/jquery.mmenu.min.all.js: {}
+    components/slider/jquery.themepunch.tools.min.js: {}
+    components/slider/jquery.themepunch.revolution.min.js: {}
+    components/slider/extensions/revolution.extension.actions.min.js: {}
+    components/slider/extensions/revolution.extension.carousel.min.js: {}
+    components/slider/extensions/revolution.extension.kenburn.min.js: {}
+    components/slider/extensions/revolution.extension.layeranimation.min.js: {}
+    components/slider/extensions/revolution.extension.migration.min.js: {}
+    components/slider/extensions/revolution.extension.navigation.min.js: {}
+    components/slider/extensions/revolution.extension.parallax.min.js: {}
+    components/slider/extensions/revolution.extension.slideanims.min.js: {}
+    components/slider/extensions/revolution.extension.video.min.js: {}
+    components/isotope.pkgd.min.js: {}
+    components/jquery.directional-hover.min.js: {}
+    components/imagesloaded.pkgd.min.js: {}
+    js/main.js: {}
+    js/update.js: {}

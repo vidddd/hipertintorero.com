@@ -1,0 +1,8 @@
+name: Tintorero
+description: Cosas de Hipertintorero.com
+package: Custom
+type: module
+version: 1.0
+core: 8.x
+dependencies:
+  - block

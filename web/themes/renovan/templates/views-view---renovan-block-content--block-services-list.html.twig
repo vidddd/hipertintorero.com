@@ -1,0 +1,17 @@
+{% if rows %}
+    <div class="service-content">
+        <div class="container">
+            {% if header %}
+                {{ header }}
+            {% endif %}            
+            {% for row in rows %}
+                {{ row }}
+            {% endfor %}
+            {% if pager %}
+                <div class="pagination">
+                    {{ pager }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

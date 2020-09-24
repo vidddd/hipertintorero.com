@@ -1,0 +1,10 @@
+<aside class="sidebar widget productos-left">
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+{% block content %}
+<ul class="product-list-widget">
+  {{ content }}
+</ul>
+{% endblock %}
+</aside>

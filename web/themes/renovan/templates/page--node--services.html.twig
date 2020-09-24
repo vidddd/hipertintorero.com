@@ -1,0 +1,24 @@
+{% if node.field_layout_style.0.value %}
+    {% set style = node.field_layout_style.0.value %}
+{% else %}
+    {% set style = 'style1' %}
+{% endif %}
+{% if style == 'style1'%}
+    {% set class = 'page-service-detail-01' %}
+{% elseif style == 'style2'%}
+   {% set class = 'page-service-detail-02' %} 
+{% else %}
+    {% set class = 'page-service-detail-03' %} 
+{% endif %}
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+<div class='{{class}}'>
+    {% if page.content %}
+        {{ page.content }}
+    {% endif %}
+    {% if page.section %}
+        {{ page.section }}
+    {% endif %}
+</div>
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

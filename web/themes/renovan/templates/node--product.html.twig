@@ -1,0 +1,131 @@
+{#{kint(content)}#}
+
+    {% set product_image = node.uc_product_image %}
+    {% set oneimage = node.uc_product_image.0.entity.uri.value %}
+    {% set alt_image = node.uc_product_image.0.alt%}
+
+{% if not page %}
+
+    {%block nodeheader %}
+        <div class="col-sm-6 col-md-4 product">
+            <div class="product-thumb">
+                <a href="{{url}}" class="product-thumb_link">
+                    <img src="{{file_url(oneimage)}}" alt="{{alt_image}}">
+                </a>
+                {{content.add_to_cart}}
+            </div>
+            <h3>
+                <a href="{{ url}}" class="product-title">{{node.getTitle}}</a>
+            </h3>
+            <div class="price">
+                <span class="amount">{{content.price}}</span>
+            </div>
+        </div>      
+    {% endblock%}
+        
+{% else %}{# single #}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+
+                <div class="images-product">
+                    {% if product_image.0.value  and product_image|length ==1%}
+                    <a href="{{ file_url(oneimage) }}">
+                        <img class="attachment-shop-single" src="{{ file_url(oneimage) }}" alt="{{alt_image}}">
+                    </a>
+                    {% elseif product_image.0.value and product_image|length >1 %}
+                    <a href="{{ file_url(oneimage) }}">
+                        <img class="attachment-shop-single" src="{{ file_url(oneimage) }}" alt="{{alt_image}}">
+                    </a>
+                    {% for img in product_image|slice(1,8) %}
+                            <a href="{{ file_url(img.entity.uri.value)}}">
+                                   <img class="img-thumbnail" src="{{ file_url(img.entity.uri.value)}}" alt="{{img.entity.alt}}">
+                           </a>
+                  {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h1 class="product-title">{{ title}}</h1>
+                <div class="price">
+                    <span class="amount">{{content.price}}</span></span>
+                </div>
+
+                <div class="description">
+                  {{ node.body.summary}}
+                </div>
+
+                 {{content.add_to_cart}}
+
+                <div class="product-meta">
+                    <span>category:
+                        {{content.taxonomy_catalog}}
+                    </span>
+                    <span>tags:
+                      {{content.field_product_tags}}
+                    </span>
+                </div>
+                <div class="product-share-buttons">
+                    <span>share on:
+                        <a href="http://www.facebook.com/sharer/sharer.php?u={{ base_root ~ url}}&t={{ title }}"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/share?url={{base_root ~ url}}&text={{ title }}"><i class="fa fa-twitter"></i></a>
+                        <a href="https://plus.google.com/share?url={{base_root ~ url}}"><i class="fa fa-google-plus"></i></a>
+                    </span>
+                </div>
+
+                <!-- Accordion -->
+                <div class="panel-group accordion-rn" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Description
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                               {{content.body}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Additional Informations
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                            {{content.field_additional_informations}}  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Reviews({{ node.field_comments.comment_count }})
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <div class="reviews">
+                                  {{content.field_comments}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>    
+   
+{% endif %}

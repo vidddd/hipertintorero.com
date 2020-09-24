@@ -1,0 +1,110 @@
+{% if node.field_layout_style.0.value %}
+    {% set style = node.field_layout_style.0.value %}
+{% else %}
+    {% set style = 'style1' %}
+{% endif %}
+    
+
+    {% set oneimage = node.field_image.0.entity.uri.value %}
+    {% set images = node.field_image%}
+    {% set alt_image = node.field_image.0.alt %}
+
+
+{% if not page %}
+    <div class="services-style-01 col-sm-6 col-md-4">
+        <div class="service-item">
+            <div class="service-item_img">
+                <img src="{{img_uri_370_200}}" alt="{{alt_image}}">
+            </div>
+            <a class="service-item_link" href="{{url}}">
+                <div class="service-item_icon"><i class="{{content.field_icon_class}}"></i></div>
+                {{node.getTitle}}
+            </a>
+        </div>
+    </div>
+{% else %}
+    {% if style == 'style2' %}
+        <div class="container">
+            <div class="row service-detail_heading">
+                <div class="col-xs-12 text-center">
+                    <h2 class="heading-title">{{title}}</h2>
+                    {{ node.body.summary}}
+                </div>
+            </div>
+            <!-- /.service-detail_heading -->
+            <br/>
+
+            <div class="row service-detail_content">
+                <div class="col-sm-6">
+                    <img class="service-detail_img" src="{{file_url(oneimage)}}" alt="{{alt_image}}">
+                </div>
+                
+                <div class="col-sm-6">
+                    <ul class="service-list_item-categories">
+                       {{content.field_service_list_item}}
+                    </ul>
+                </div>
+                 
+            </div>
+                       
+            <!-- /.service-detail_content -->
+        </div>
+
+        <div class="service-price">
+            <div class="container">
+                <div class="row">
+                   {{content.body}}
+                </div>
+            </div>
+        </div>
+        <!-- /.service-price -->       
+    {% elseif style == 'style3' %}
+        <div class="container">
+            <div class="row service-detail_heading">
+                <div class="col-xs-12 text-center">
+                    <h2 class="heading-title">{{node.getTitle}}</h2>
+                    <p>{{ node.body.summary}}</p>
+                </div>
+            </div>
+            <!-- /.service-detail_heading -->
+
+            <div class="row service-detail_content">
+               {{content.body}}
+            </div>
+            <!-- /.service-detail_content -->
+        </div>
+    {% else %}  
+        <div class="service-detail_img">
+          <div class="container">
+            <div class="row">
+             {% for img in images|slice(0,3) %}
+                    <div class="col-sm-4">
+                        <img  src="{{ file_url(img.entity.uri.value)}}" alt="{{img.entity.alt}}">
+                   </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!-- /.service-detail_img -->
+
+        <div class="service-detail_content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <h2 class="heading-title">{{Title}}</h2>
+              {{ node.body.summary}}
+              <hr/>
+                <ul class="service-list_item-categories">
+                 {{content.field_service_list_item}}
+                </ul>
+              </div>
+
+              <div class="col-sm-6">
+              {{content.body}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.service-detail_content -->        
+    {% endif %}
+{% endif %}

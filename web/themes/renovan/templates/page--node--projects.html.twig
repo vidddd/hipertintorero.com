@@ -1,0 +1,12 @@
+{% include theme_path ~ "/templates/header.html.twig" %}
+{% include theme_path ~ "/templates/page-title.html.twig" %}
+   <div class="page-projects-single"> 
+    {% if page.content %}
+        {{ page.content }}
+    {% endif %}
+    {% if page.section %}
+        {{ page.section }}
+    {% endif %}
+   </div>
+{% include theme_path ~ "/templates/footer.html.twig" %}
+

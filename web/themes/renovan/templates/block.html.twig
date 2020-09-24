@@ -1,0 +1,48 @@
+
+{% if region == 'sidebar'%}
+    <aside{{ attributes }}>
+      {{ title_prefix }}
+      {% if label %}
+        <h3 {{ title_attributes.addClass('widget-title')}}>{{ label }}</h3>
+      {% endif %}
+      {{ title_suffix }}
+      {% if content %}
+        {{ content }}
+      {% endif %}
+    </aside>
+{% elseif region == 'section' %}
+    <section{{ attributes }}>
+      {{ title_prefix }}
+      {% if label %}
+        <h2 class="title">{{ label }}</h2>
+      {% endif %}
+      {{ title_suffix }}
+      {% if content %}
+        {{ content }}
+      {% endif %}
+    </section>
+{% elseif region == 'search' %}
+    <div{{ attributes }}>
+      {{ title_prefix }}
+      {% if label %}
+        <h2 class="title">{{ label }}</h2>
+      {% endif %}
+      {{ title_suffix }}
+      {% if content %}
+        {{ content }}
+      {% endif %}
+      
+    </div>
+
+{% else %}
+    <div{{ attributes }}>
+      {{ title_prefix }}
+      {% if label %}
+        <h3{{ title_attributes }}>{{ label }}</h3>
+      {% endif %}
+      {{ title_suffix }}
+      {% if content %}
+        {{ content }}
+      {% endif %}
+    </div>
+{% endif %}

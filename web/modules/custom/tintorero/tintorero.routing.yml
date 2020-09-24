@@ -1,0 +1,7 @@
+tintorero.contacto:
+  path: '/contacto'
+  defaults:
+    _controller: '\Drupal\tintorero\Controller\TintoreroController::contacto'
+    _title: 'Contacto'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,288 @@
+{#
+/**
+ * @file
+ * Default theme implementation to format the simplenews newsletter body.
+ *
+ * Copy this file in your theme directory to create a custom themed body.
+ * Rename it to override it. Available templates:
+ *   simplenews-newsletter-body--[newsletter_id].html.twig
+ *   simplenews-newsletter-body--[view mode].html.twig
+ *   simplenews-newsletter-body--[newsletter_id]--[view mode].html.twig
+ * See README.txt for more details.
+ *
+ * Available variables:
+ * - build: Render array. Use {{ build }} to print it.
+ * - node: object(Drupal\node\Entity\Node)
+ *   The node entity with limited access to object properties and methods.
+ *   * Methods: Only "getter" methods (method names starting with "get", "has", or "is")
+ *     and a few common methods such as "id" and "label" are available.
+ *     {{ node.getTitle }} : the Node title ( == {{ title }} )
+ *     Calling other methods (such as node.delete) will result in an exception.
+ *   * Properties: field values can be accessed as follows:
+ *     {{ node.body.value | raw }} : text of body field
+ * - newsletter: object(Drupal\simplenews\Entity\Newsletter)
+ *     {{ newsletter.from_name }}: string
+ *     {{ newsletter.subject }}: string
+ * - title: Node title
+ * - view_mode: The active display view mode of the node
+ * - key: email key [node|test]
+ * - format: newsletter format [plain|html]
+ * - simplenews_subscriber: object(Drupal\simplenews\Entity\Subscriber)
+ *   The subscriber for which the newsletter is built.
+ *     {{ simplenews_subscriber.getMail  }}: string: subscriber's email address
+ *   Note that depending on the used caching strategy, the generated body might
+ *   be used for multiple subscribers. If you created personalized newsletters
+ *   and can't use tokens for that, make sure to disable caching or write a
+ *   custom caching strategy implemention.
+ *   /opt/plesk/php/7.1/bin/php /var/www/vhosts/hipertintorero.com/httpdocs/vendor/drush/drush/drush cron --quiet
+ * @see template_preprocess_simplenews_newsletter_body()
+ */
+#}
+<table width="100%" bgcolor="#d1d3d4" border="0" cellspacing="0" cellpadding="0">
+	<tbody>
+		<tr>
+			<td align="center">
+				<table
+					width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff" style="font-family:helvetica, sans-serif;" class="MainContainer">
+					<!-- =============== START HEADER =============== -->
+					<tbody>
+						<tr>
+							<td>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<td valign="top" width="20">&nbsp;</td>
+											<td>
+												<table width="100%" border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td class="movableContentContainer">
+																<div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
+																	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																		<tbody>
+																			<tr>
+																				<td height="15"></td>
+																			</tr>
+																			<tr>
+																				<td>
+																					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr>
+																								<td valign="top">
+																									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																										<tbody>
+																											<tr>
+																												<td valign="top" width="460">
+																													<a target='_blank' href="https://hipertintorero.com"><img src="https://hipertintorero.com/newsletters/images/logo-horizontal.png" alt="Logo Hiper Tintorero" title="Logo Hiper Tintorero" width="460" height="" style="width:460px"></a></td>
+																												<td width="10" valign="top">&nbsp;</td>
+
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																								<td valign="top" width="90" class="spechide">&nbsp;</td>
+																								<td valign="middle" style='vertical-align: middle;' width='150'>
+																									<div>
+																										<div class='contentEditable' style='text-align: right;'>
+																											<a target='_blank' href="https://hipertintorero.com" style='font-size: 13px;color: #27A1E5;line-height: 24px;text-decoration: none;'></a>
+																										</div>
+																									</div>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height='15'></td>
+																			</tr>
+																			<tr>
+																				<td>
+																					<hr style='height:1px;background:#DDDDDD;border:none;'>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+																<!-- =============== END HEADER =============== -->
+																<!-- =============== START BODY =============== -->
+																<div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
+																	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																		<tbody>
+																			<tr>
+																				<td valign="top" width="580">
+																					<div class='contentEditable' style='text-align: center;'>
+																						<h2 style="font-size: 20px;color:#3969a1;">Productos para la Perfecta Desinfecci&oacute;n</h2>
+
+																					</div>
+																					<div class='contentEditableContainer contentImageEditable'>
+																						<div class='contentEditable' style="text-align: center;"><img class="banner" src="https://hipertintorero.com/newsletters/06-2020/images/higienizantes.jpg" alt="Productos Hiper Tintorero" title="Logo" width="580" border="0">
+																						</div>
+																					</div>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+
+																</div>
+																<div class='contentEditableContainer contentTextEditable'>
+																	<div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
+																		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																			<tbody>
+																				<tr>
+																					<td height="40"></td>
+																				</tr>
+																				<tr>
+																					<td>
+																						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																							<tbody>
+																								<tr>
+																									<td>
+																										<div class='contentEditableContainer contentTextEditable'>
+																											<div class='contentEditable' style='text-align: left;'>
+																												<h2 style="font-size: 20px;font-weight:normal;line-height:20px;">KENTIA</h2>
+																												<p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">Es un detergente atomizado de espuma controlada, de elevada riqueza en tensioactivos y secuestrantes.</p>
+																												<p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/kentia" style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+                                                                                                                </p>
+                                                                                                                    <br>
+																											</div>
+																										</div>
+																									</td>
+																									<td valign="top" width="75">&nbsp;</td>
+																									<td>
+																										<div class='contentEditableContainer contentTextEditable'>
+																											<div class='contentEditable' style='text-align: left;'>
+																												<h2 style="font-size: 20px;font-weight:normal;line-height:20px;">HYGIENCLEAN</h2>
+																												<p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">HYGIENCLEAN es un agente higienizante para el lavado con agua que tiene que ser utilizado junto a un detergente estándar.</p>
+                                                                                                                <p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/hygienclean" style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+																												</p><br>
+																											</div>
+																										</div>
+																									</td>
+																								</tr><br>
+																								<tr style="margin-top:30px;">
+																									<td>
+																										<div class='contentEditableContainer contentTextEditable'>
+																											<div class='contentEditable' style='text-align: left;'>
+																												<h2 style="font-size: 20px;font-weight:normal;line-height:20px;">OXICLEAN</h2>
+																												<p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">Activador de detergente con ox&iacute;geno activo y enzimas.</p>
+                                                                                                                <p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/oxiclen" style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+																												</p><br>
+																											</div>
+																										</div>
+																									</td>
+																									<td valign="top" width="75">&nbsp;</td>
+																									<td>
+																										<div class='contentEditableContainer contentTextEditable'>
+																											<div class='contentEditable' style='text-align: left;'>
+																												<h2 style="font-size: 20px;font-weight:normal;line-height:20px;">BLANQUIBEL</h2>
+																												<p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">Blanqueante Higienizante Clorado.</p>
+                                                                                                                <p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/blanquibel" style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+																												</p><br>
+																											</div>
+																										</div>
+																									</td>
+                                                                                                </tr>
+                                                                                                            <tr style="margin-top:30px;">
+                                                                                                                <td>
+                                                                                                                    <div class='contentEditableContainer contentTextEditable'>
+                                                                                                                        <div class='contentEditable' style='text-align: left;'>
+                                                                                                                            <h2 style="font-size: 20px;font-weight:normal;line-height:20px;">HIGISOL</h2>
+                                                                                                                            <p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">Soluci&oacute;n higienizante alcohólica para manos y superficies.</p>
+                                                                                                                            <p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/higisol"
+                                                                                                                                    style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+                                                                                                                            </p><br>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </td>
+                                                                                                                <td valign="top" width="75">&nbsp;</td>
+                                                                                                                <td>
+                                                                                                                    <div class='contentEditableContainer contentTextEditable'>
+                                                                                                                        <div class='contentEditable' style='text-align: left;'>
+                                                                                                                            <h2 style="font-size: 20px;font-weight:normal;line-height:20px;">OXILID</h2>
+                                                                                                                            <p style="font-size: 14px;line-height: 21px;color: #AAAAAA;">Aditivo Blanqueante Líquido con oxígeno activo.</p>
+                                                                                                                            <p style="line-height:18px;"><a target='_blank' href="https://hipertintorero.com/oxilid"
+                                                                                                                                    style='color:#ffffff;border-top: 10px solid #27A1E5;border-bottom: 10px solid #27A1E5;border-left: 18px solid #27A1E5;border-right: 18px solid #27A1E5;border-radius: 3px;background: #27A1E5;text-decoration:none;'>Comprar</a>
+                                                                                                                            </p><br>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </td>
+                                                                                                            </tr>
+																							</tbody>
+																						</table>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</div>
+
+																		<!-- =============== END BODY =============== -->
+																		<!-- =============== START FOOTER =============== -->
+
+																		<div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
+																			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td height="48"></td>
+																					</tr>
+																					<tr>
+																						<td>
+																							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td valign="top" width="90" class="spechide">&nbsp;</td>
+																										<td>
+																											<table width="100%" cellpadding="0" cellspacing="0" align="center">
+																												<tr>
+																													<td>
+																														<div class='contentEditableContainer contentTextEditable'>
+																															<div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
+																																<p>
+																																	Enviado por Hiper Tintorero .com
+																																	<br/>
+																																	{% if not opt_out_hidden %}
+																																		{% if format == 'html' %}
+																																			<a href="[simplenews-subscriber:unsubscribe-url]">Darse de baja</a>
+
+																																		{% else %}
+																																			--
+																																			{{ unsubscribe_text }}
+																																			: [simplenews-subscriber:unsubscribe-url]
+																																		{% endif %}
+																																	{% endif %}
+																																</p>
+																															</div>
+																														</div>
+																													</td>
+																												</tr>
+																											</table>
+																										</td>
+																										<td valign="top" width="90" class="spechide">&nbsp;</td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+
+																		</div>
+																	</td>
+																</tr>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+											<td valign="top" width="20">&nbsp;</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

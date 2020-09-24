@@ -1,0 +1,221 @@
+<?php
+
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+function renovan_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $suggestions[] = 'page__node__' . $node->getType();
+    }
+}
+
+
+function renovan_preprocess_block(&$variables) {
+global $base_url;
+	switch ($variables['base_plugin_id']) {
+	    case 'system_branding_block':
+	      $variables['site_logo'] = '';
+	      if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+	        $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
+	      }
+	    break;
+
+  	}
+	if(!empty(theme_get_setting('second_logo_file', 'comets'))){
+		$variables['second_logo'] = $base_url.theme_get_setting('second_logo_file', 'comets');
+	}else{
+		$variables['second_logo'] = '';
+	}
+
+	if(isset($variables['elements']['#id']) && !empty($variables['elements']['#id'])){
+		$block_id = $variables['elements']['#id'];
+	  	$block = \Drupal\block\Entity\Block::load($block_id);
+	  	if($block->getRegion()){
+	  		$region = $block->getRegion();
+	  		$variables['region'] = $region;
+	  	}
+	//config as context module
+	}else{
+		$variables['region'] = $variables['elements']['#configuration']['region'];
+	}
+}
+
+function renovan_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+// Name
+    $form['name']['#prefix'] = '<div class="row"><div class="col-md-6">';
+    $form['name']['#suffix'] = '</div>';
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . '*';
+    unset($form['name']['#title']);
+
+// Mail
+    $form['mail']['#prefix'] = '<div class="col-md-6">';
+    $form['mail']['#suffix'] = '</div></div>';
+    $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'] . '*';
+    unset($form['mail']['#title']);
+
+    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'] . '*';
+//    $form['subject']['widget'][0]['#title'] = '';
+    unset($form['subject']['widget'][0]['value']['#title']);
+
+//// Message
+
+    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'] . '*';
+    unset($form['message']['widget'][0]['value']['#title']);
+//
+//// Submit
+
+
+}
+
+
+function renovan_preprocess_node(&$vars) {
+
+       if (isset($_GET['style'])) {
+        $vars['blog_style'] = $_GET['style'];
+    } else {
+        $vars['blog_style'] = theme_get_setting('blog_style', 'renovan');
+    }
+
+//    echo '<pre>';print_r($vars['node']->field_service_list_item[0]);echo'</pre>';
+    $site_name = \Drupal::config('system.site')->get('name');
+    $vars['site_name'] = $site_name;
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        $vars['title'] = \Drupal::service('title_resolver')->getTitle($request, $route);
+    }
+
+
+    if (isset($vars['node']->field_image) && !empty($vars['node']->field_image)) {
+
+        /*    $fid = $vars['node']->field_image->getValue()[0]['target_id'];
+            $file = File::load($fid);
+            $image_uri = ImageStyle::load('image370x')->buildUrl($file->getFileUri());
+            $vars['img_uri_370_200'] = $image_uri;*/
+              $vars['img_uri_370_200']  = '';
+
+    } else {
+        $vars['img_uri_370_200'] = '';
+    }
+
+       if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+        $term_id = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+        $term = taxonomy_term_load($term_id);
+        //$term_name = $term_object->get('name')->value;
+        $variables['current_term'] = $term;
+       }
+
+    //get current term (tid)
+    if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+        $term_id = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+        $term = taxonomy_term_load($term_id);
+        //$term_name = $term_object->get('name')->value;
+        $vars['current_term'] = $term;
+    }
+}
+
+function renovan_preprocess_html(&$variables) {
+    $theme = \Drupal::theme()->getActiveTheme()->getName();
+    $variables['attributes']['class'][] = 'ltr';
+    $variables['general_setting_tracking_code'] = theme_get_setting('general_setting_tracking_code', $theme);
+    $variables['custom_css'] = theme_get_setting('custom_css', $theme);
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    if ($node) {
+        if (isset($node->field_header_style) && !empty($node->field_header_style->getValue()[0]['value']))
+            $layout_class = $node->field_header_style->getValue()[0]['value'];
+        else
+            $layout_class = theme_get_setting('header_style', 'renovan');
+        if ($layout_class == '')
+            $layout_class = 'page-home01';
+
+        $variables['layout_class'] = $layout_class;
+    } elseif (theme_get_setting('header_style', 'renovan') != '') {
+        $variables['layout_class'] = theme_get_setting('header_style', 'renovan');
+    } else {
+        $variables['layout_class'] = 'page-home01';
+    }
+    if ($node){
+        if (isset($node->field_page_class) && !empty($node->field_page_class->getValue()[0]['value']))
+            $variables['page_class'] = $node->field_page_class->getValue()[0]['value'];
+        else
+            $variables['page_class'] = '';
+    }
+    else{
+        $variables['page_class'] = '';
+    }
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function renovan_preprocess_page(&$variables) {
+
+    global $base_root, $base_url;
+    $node = \Drupal::routeMatch()->getParameter('node');
+    $variables['social_networks'] = theme_get_setting('header_social_networks', 'renovan');
+
+    if (isset($_GET['style'])) {
+        $variables['blog_style'] = $_GET['style'];
+    } else {
+        $variables['blog_style'] = theme_get_setting('blog_style', 'renovan');
+    }
+
+    if (isset($_GET['sidebar'])) {
+        $variables['blog_sidebar'] = $_GET['sidebar'];
+        $variables['projects_sidebar'] = $_GET['sidebar'];
+    } else {
+        $variables['blog_sidebar'] = theme_get_setting('sidebar', 'renovan');
+        $variables['projects_sidebar'] = theme_get_setting('projects_sidebar', 'renovan');
+    }
+    if (!empty(theme_get_setting('header_bg_image_file', 'renovan'))) {
+        $variables['header_bg_image'] = $base_url . theme_get_setting('header_bg_image_file', 'renovan');
+    } else {
+        $variables['header_bg_image'] = '';
+    }
+
+        if (!empty(theme_get_setting('bg_footer_image_file', 'renovan'))) {
+        $variables['bg_footer_image'] = $base_url . theme_get_setting('bg_footer_image_file', 'renovan');
+    } else {
+        $variables['bg_footer_image'] = '';
+    }
+
+    $variables['page_title_format'] = theme_get_setting('page_headers_style', 'renovan');
+
+    $theme = \Drupal::theme()->getActiveTheme()->getName();
+    $variables['theme_path'] = drupal_get_path('theme', $theme);
+
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        $variables['title'] = \Drupal::service('title_resolver')->getTitle($request, $route);
+    }
+    //create link taxonomy term starts
+
+            $variables['header_style'] = theme_get_setting('header_style', 'renovan');
+
+    //get current term (tid)
+    if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+        $term_id = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+        $term = taxonomy_term_load($term_id);
+        //$term_name = $term_object->get('name')->value;
+        $variables['current_term'] = $term;
+    }
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $variables['type'] = $node->getType();
+    }
+
+}
+
+function renovan_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    unset($form['search_block_form']['#title']); // remove label form
+    $form['actions']['submit']['#value'] = t(''); // Change the text on the submit button
+}
+
+function renovan_preprocess_container(&$variables) {
+    $variables['container_type'] = $variables['element']['#type'];
+}
+
+//Có tác động đến view blog   được sử dụng trong page--blog.html.twig
+function renovan_preprocess_views_view(&$variables) {
+    $theme = \Drupal::theme()->getActiveTheme()->getName();
+}

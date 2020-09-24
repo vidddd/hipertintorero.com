@@ -1,0 +1,12 @@
+<div class="row">
+  <div id="mas-vendidos-block" class="owl1 owl-carousel owl-theme">
+{% for row in rows %}
+  {%
+    set row_classes = [
+      default_row_class ? 'views-row',
+    ]
+  %}
+    <div class="item">{{ row.content }}</div>
+{% endfor %}
+
+</div></div>

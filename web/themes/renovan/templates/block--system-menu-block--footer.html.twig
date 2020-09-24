@@ -1,0 +1,15 @@
+
+ <div{{ attributes }}>
+      {{ title_prefix }}
+      {% if label %}
+        <h3 {{ title_attributes.addClass('widget-tittle')}}>{{ label }}</h3>
+      {% endif %}
+      {{ title_suffix }}
+      {% if content %}
+        {% block content %}
+            {{ content }}
+        {% endblock %}
+      {% endif %}
+    </div>
+{# Menu. #}
+

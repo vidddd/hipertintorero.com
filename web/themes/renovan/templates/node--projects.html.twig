@@ -1,0 +1,146 @@
+{% if node.field_projects_single_style.0.value %}
+    {% set style = node.field_projects_single_style.0.value %}
+{% else %}
+    {% set style = 'fullwidth' %}
+{% endif %}
+    
+{% if node.field_image.0.entity.uri.value %}
+    {% set oneimage=node.field_image.0.entity.uri.value %}
+         {% set alt_image = node.field_image.0.alt %}
+{% else %}
+    {% set oneimage='' %}
+{% endif %}
+    
+{% if not page %}
+    <div class="post post-grid-item col-sm-6">
+    <div class="post-thumb">
+        <a class="attachment-post-thumb" href="{{url}}"><img src="{{file_url(oneimage)}}" alt="{{alt_image}}"></a>
+    </div>
+    <div class="entry-header">
+        <h2 class="entry-title">
+            <a href="{{url}}">{{node.getTitle}}</a>
+        </h2>
+    </div>
+    <div class="entry-content">
+        <p>{{ node.body.summary|length > 292 ? node.body.summary|slice(0,292) ~ '...' : node.body.summary }}</p>
+        <a href="{{url }}" class="read-more">read more<i class="fa fa-angle-double-right"></i></a>
+    </div>
+</div>
+{% else %}
+    {% if style == 'fullwidth' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2 class="project-title">{{ node.getTitle}}</h2>
+                    <div class="post-share-buttons">
+                        <span>share</span>
+                        <a href="http://www.facebook.com/sharer/sharer.php?u={{ base_root ~ url}}&t={{ title }}"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/share?url={{base_root ~ url}}&text={{ title }}"><i class="fa fa-twitter"></i></a>
+                        <a href="https://plus.google.com/share?url={{base_root ~ url}}"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                    <!-- /.post-share-buttons -->
+                    <div class="project-description">
+                        <h3 class="project-description_title">{{'Project Description'|t}}</h3>
+                        <p class="project-description_content">{{ node.body.summary|length > 292 ? node.body.summary|slice(0,292) ~ '...' : node.body.summary }}</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="project-details">
+                        <table>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Client</span>
+                                    <span class="meta_value">{{content.field_client}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Location</span>
+                                    <span class="meta-value">{{content.field_location}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Value</span>
+                                    <span class="meta-value">{{content.field_value}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Categories</span>
+                                    <div>{{content.field_project_categories}}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    {% for image in node.field_image %}
+                        <figure>
+                            <img class="single-image" src="{{ file_url(image.entity.uri.value) }}" alt="{{image.entity.alt}}">
+                        </figure>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h2 class="project-title">{{node.getTitle}}</h2>
+                    <div class="project-description">
+                        <h3 class="project-description_title">{{'Project Description'|t}}</h3>
+                        <p class="project-description_content">{{ node.body.summary|length > 292 ? node.body.summary|slice(0,292) ~ '...' : node.body.summary }}</p>
+                    </div>
+                    <div class="project-details">
+                        <table>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Client</span>
+                                    <span class="meta_value">{{content.field_client}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Location</span>
+                                    <span class="meta-value">{{content.field_location}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Value</span>
+                                    <span class="meta-value">{{content.field_value}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="meta-title">Categories</span>
+                                    <div>{{content.field_project_categories}}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="post-share-buttons">
+                        <span>share</span>
+                        <a href="http://www.facebook.com/sharer/sharer.php?u={{ base_root ~ url}}&t={{ title }}"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/share?url={{base_root ~ url}}&text={{ title }}"><i class="fa fa-twitter"></i></a>
+                        <a href="https://plus.google.com/share?url={{base_root ~ url}}"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                    <!-- /.post-share-buttons -->
+                </div>
+
+                <div class="col-sm-8">
+                {% for image in node.field_image %}
+                    <figure>
+                        <img class="single-image" src="{{ file_url(image.entity.uri.value) }}" alt="{{image.entity.alt}}">
+                    </figure>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

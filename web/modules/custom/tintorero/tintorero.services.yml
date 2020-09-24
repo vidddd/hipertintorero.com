@@ -1,0 +1,5 @@
+services:
+  tintorero.subscriber:
+    class: Drupal\tintorero\EventSubscriber\NifEventSubscriber
+    tags:
+      - {name: event_subscriber} 

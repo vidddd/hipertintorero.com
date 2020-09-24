@@ -1,0 +1,38 @@
+{%if node.field_footer_background_image.0.entity.uri.value %}
+    {% set oneimage = node.field_footer_background_image.0.entity.uri.value %}
+    {% set oneimage =   file_url(oneimage) %}
+{% else %}
+    {% set oneimage = bg_footer_image %}
+{% endif %}
+    
+<footer class="footer"{% if oneimage !='' %} style="background: url('{{oneimage}}')"{% endif %}>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        {% if page.footer_column_1 %}
+            {{ page.footer_column_1 }}
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        {% if page.footer_column_2 %}
+            {{ page.footer_column_2 }}
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        {% if page.footer_column_3 %}
+            {{ page.footer_column_3 }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+   {% if social_networks !='' %}
+        <div class="social-menu social-menu_right-arrow">
+          {{ social_networks|t }}
+        </div>
+  {% endif %}
+</footer>
+<!-- /.footer -->
+
+{% if page.footer %}
+    {{ page.footer }}
+{% endif %}

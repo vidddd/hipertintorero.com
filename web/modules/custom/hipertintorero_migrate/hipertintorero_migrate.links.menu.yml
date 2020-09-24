@@ -1,0 +1,6 @@
+hipertintorero_migrate.admin:
+  title: 'Hiper Tintorero Migrate settings'
+  description: ''
+  parent: system.admin_config_development
+  route_name: hipertintorero_migrate.content
+  weight: 100

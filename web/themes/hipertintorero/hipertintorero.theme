@@ -1,0 +1,115 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+
+function hipertintorero_preprocess_page(&$vars)
+{
+  if (isset($vars['node'])) {
+    $vars['title'] = $vars['node']->title->value;
+  } else {
+    $vars['title'] = $vars['page']['#title'];
+  }
+  $menu_name = "main"; // I think
+  $menu_tree = \Drupal::service('menu.link_tree');
+  $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+  $parameters->setMaxDepth(2)
+    ->onlyEnabledLinks()->excludeRoot();
+  $tree = $menu_tree->load($menu_name, $parameters);
+  $manipulators = array(
+    array('callable' => 'menu.default_tree_manipulators:checkAccess'),
+    array('callable' => 'menu.default_tree_manipulators:generateIndexAndSort'),
+  );
+  $tree = $menu_tree->transform($tree, $manipulators);
+  $vars['mainmenu'] = $menu_tree->build($tree);
+}
+
+function hipertintorero_page_attachments_alter(&$page)
+{
+  if (\Drupal::service('path.matcher')->isFrontPage())
+    $page['#attached']['library'][] = 'hipertintorero/revolution-slider';
+}
+
+function hipertintorero_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+  if ($form_id == 'simplenews_subscriptions_block_2024b190-2367-45f9-bfb8-8749be2f6926') {
+    $form['actions']['subscribe']['#value'] = 'Enviar';
+  }
+  if ($form_id == 'search_api_page_block_form_busqueda_productos') {
+    $form['actions']['submit']['#value'] = 'Buscar';
+  }
+  if ($form_id == 'commerce_checkout_flow_multistep_default') {
+    $form['shipping_information']['recalculate_shipping']['#value'] = 'Calcular Costes de Envio';
+  }
+}
+
+function hipertintorero_preprocess_block(&$vars)
+{
+  $clase = 'lavado-seco';
+  $pre = '';
+  if ($vars['plugin_id'] == 'page_title_block') {
+    if (
+      \Drupal::routeMatch()
+      ->getRouteName() == 'entity.taxonomy_term.canonical' && $tid = \Drupal::routeMatch()->getRawParameter('taxonomy_term')
+    ) {
+      $term = Term::load($tid);
+      $termid = $term->id();
+      $ancestors = \Drupal::service('entity_type.manager')->getStorage("taxonomy_term")->loadAllParents($termid);
+      $padre = end($ancestors);
+
+      switch ($padre->id()):
+        case 1:
+          $clase = 'lavado-seco';
+          $pre = "LAVADO EN SECO";
+          break;
+        case 2:
+          $clase = 'lavado-agua';
+          $pre = "LAVADO EN AGUA";
+          break;
+        case 3:
+          $clase = 'quitamanchas';
+          $pre = 'QUITAMANCHAS';
+          break;
+        case 4:
+          $clase = 'marcado';
+          $pre = 'MARCADO DE PRENDAS';
+          break;
+        case 5:
+          $clase = 'planchado';
+          $pre = 'PLANCHADO';
+          break;
+        case 6:
+          $clase = 'transporte';
+          $pre = 'TRANSPORTE';
+          break;
+        case 7:
+          $clase = 'piel';
+          $pre = 'PIEL';
+          break;
+        case 8:
+          $clase = 'acabado';
+          $pre = 'ACABADO DE PRENDAS';
+          break;
+        default:
+          $clase = 'lavado-seco';
+          break;
+      endswitch;
+    }
+    $vars['clase'] = $clase;
+    $vars['pre'] = $pre;
+  }
+}
+
+/**
+ * Prepares variables for the cart block element template.
+ */
+function hipertintorero_preprocess_commerce_cart_block(&$variables)
+{
+
+  if (!empty($variables['content'][0]['#arguments'][0])) {
+    $order_id = $variables['content'][0]['#arguments'][0];
+    $checkout_path = 'internal:/checkout/' . $order_id . '/order_information';
+    $urlpagar = Url::fromUri($checkout_path);
+    $variables['urlpagar'] = $urlpagar;
+  }
+}

@@ -1,0 +1,7 @@
+name: 'Commerce Shipping for Hipertintorero.com'
+type: module
+description: 'Provides a shipping method for hipertintorero.com'
+package: Custom
+core: 8.x
+dependencies:
+  - commerce_shipping
