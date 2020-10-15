@@ -1,32 +1,49 @@
 <?php
-use Drupal\commerce_order\Entity\Order;
+
+//use Drupal\commerce_order\Entity\Order;
 use Drupal\Core\Form\FormStateInterface;
 
-function tintorero_preprocess_commerce_cart_block(&$variables) {
+/**
+ * Implements hook_theme().
+ */
+function tintorero_theme()
+{
+  return [
+    'commerce_order_receipt' => [
+      'template' => 'tintorero-order-receipt',
+      'base hook' => 'commerce_order_receipt',
+    ],
+  ];
+}
+
+function tintorero_preprocess_commerce_cart_block(&$variables)
+{
   $query = \Drupal::entityQuery('commerce_order')
-    ->condition('uid',\Drupal::currentUser()->id())
+    ->condition('uid', \Drupal::currentUser()->id())
     // ...which are carts
     ->condition('cart', 1)
     // ...last created last
     ->sort('created', 'ASC')
     // ...get only one
-    ->range(0,1);
+    ->range(0, 1);
 
   // execute this : you get an array of a unique order ids (last cart)
   $cartsOrders = $query->execute();
   // I found one : this user has a cart
-  if(count($cartsOrders) > 0) {
+  if (count($cartsOrders) > 0) {
     $variables['cartid'] = key($cartsOrders);
   }
 }
 
-function tintorero_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function tintorero_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
   if (($form_id == 'profile_customer_edit_form') || ($form_id == 'profile_customer_add_form') || ($form_id == 'commerce_checkout_flow_multistep_default')) {
     $form['address']['widget'][0]['address']['#after_build'][] = 'tintorero_customize_address';
   }
 }
 
-function tintorero_customize_address($element, $form_state) {
+function tintorero_customize_address($element, $form_state)
+{
   //dpm($element);
   $element['additional_name']['#title'] = t('Nif / Cif / DNI');
   $element['additional_name']['#size'] = 40;
