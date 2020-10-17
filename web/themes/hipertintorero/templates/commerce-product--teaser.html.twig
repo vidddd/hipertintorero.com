@@ -24,7 +24,10 @@
     <a href="{{ product_url }}" class="product-thumb_link">
       <img src="{{ file_url(product.field_images['#items'].entity.uri.value) }}" alt="" />
     </a>
-    <!-- <a href="#" class="btn cart-button">Al Carro</a>  -->
+    {% if product.variations %}
+      <div class="cart-button">{{ product.variations }}</div>
+    {% endif %}
+    
 
   </div>
   <h3><a href="{{ product_url }}" title="Detalle de {# titulo #}" class="product-title">{{ titulo }}</a></h3>

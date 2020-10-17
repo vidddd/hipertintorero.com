@@ -3526,80 +3526,86 @@ ol li.checkout-progress--step__current {
 }
 /** Whatsapp Block **/
 .wa__btn_popup {
-    position: fixed;
-    right: 90px;
-    bottom: 25px;
-    cursor: pointer;
-    z-index: 999;
+  position: fixed;
+  right: 90px;
+  bottom: 25px;
+  cursor: pointer;
+  z-index: 999;
 }
 .wa__btn_popup .wa__btn_popup_txt {
-    position: absolute;
-    width: 156px;
-    right: 100%;
-    background-color: #f5f7f9;
-    font-size: 12px;
-    color: #43474e;
-    top: 15px;
-    padding: 7px 0 7px 12px;
-    margin-right: 7px;
-    letter-spacing: -.03em;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    transition: .4s ease all;
-    -webkit-transition: .4s ease all;
-    -moz-transition: .4s ease all;
+  position: absolute;
+  width: 156px;
+  right: 100%;
+  background-color: #f5f7f9;
+  font-size: 12px;
+  color: #43474e;
+  top: 15px;
+  padding: 7px 0 7px 12px;
+  margin-right: 7px;
+  letter-spacing: -0.03em;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  transition: 0.4s ease all;
+  -webkit-transition: 0.4s ease all;
+  -moz-transition: 0.4s ease all;
 }
 .wa__btn_popup .wa__btn_popup_icon::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: transparent url('../images/whatsapp_logo.svg') center center no-repeat;
-        background-size: auto;
-    background-size: 30px auto;
-    -webkit-background-size: 30px auto;
-    -moz-background-size: 30px auto;
-    transition: .4s ease all;
-    -webkit-transition: .4s ease all;
-    -moz-transition: .4s ease all;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: transparent url("../images/whatsapp_logo.svg") center center
+    no-repeat;
+  background-size: auto;
+  background-size: 30px auto;
+  -webkit-background-size: 30px auto;
+  -moz-background-size: 30px auto;
+  transition: 0.4s ease all;
+  -webkit-transition: 0.4s ease all;
+  -moz-transition: 0.4s ease all;
 }
 .wa__btn_popup .wa__btn_popup_icon::after {
-    content: '';
-    opacity: 0;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: transparent url('/wp-content/plugins/whatsapp-for-wordpress/assets/img/x_icon.svg') center center no-repeat;
-        background-size: auto;
-    background-size: 14px auto;
-    -webkit-background-size: 14px auto;
-    -moz-background-size: 14px auto;
-    transition: .4s ease all;
-    -webkit-transition: .4s ease all;
-    -moz-transition: .4s ease all;
-    -ms-transform: scale(0) rotate(-360deg);
-    transform: scale(0) rotate(-360deg);
-    -webkit-transform: scale(0) rotate(-360deg);
-    -moz-transform: scale(0) rotate(-360deg);
+  content: "";
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: transparent
+    url("/wp-content/plugins/whatsapp-for-wordpress/assets/img/x_icon.svg")
+    center center no-repeat;
+  background-size: auto;
+  background-size: 14px auto;
+  -webkit-background-size: 14px auto;
+  -moz-background-size: 14px auto;
+  transition: 0.4s ease all;
+  -webkit-transition: 0.4s ease all;
+  -moz-transition: 0.4s ease all;
+  -ms-transform: scale(0) rotate(-360deg);
+  transform: scale(0) rotate(-360deg);
+  -webkit-transform: scale(0) rotate(-360deg);
+  -moz-transform: scale(0) rotate(-360deg);
 }
 .wa__btn_popup .wa__btn_popup_icon {
-    width: 56px;
-    height: 56px;
-    background: #2db742;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    box-shadow: 0px 6px 8px 2px rgba(0,0,0,.14);
-    -webkit-box-shadow: 0px 6px 8px 2px rgba(0,0,0,.14);
-    -moz-box-shadow: 0px 6px 8px 2px rgba(0,0,0,.14);
+  width: 56px;
+  height: 56px;
+  background: #2db742;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  box-shadow: 0px 6px 8px 2px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 6px 8px 2px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: 0px 6px 8px 2px rgba(0, 0, 0, 0.14);
 }
 .wa__btn_popup .wa__btn_popup_icon {
-    background: #2db742;
+  background: #2db742;
+}
+.cart-button .form-select, .cart-button .form-number {
+  display: none;
 }
