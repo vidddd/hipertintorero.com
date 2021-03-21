@@ -48,15 +48,11 @@
                 {{ page.menu_mobile}}
             {% endif %} 
       </div>
-      <!-- / Menu Mobile -->
-
       <div class="col-xs-12 col-sm-9 col-lg-8 extra-info">
          {% if page.header %}
                 {{ page.header }}
             {% endif %} 
       </div>
-      <!-- /.extra-info -->
-
       <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right search-cart">
         {% if page.search %}
             <div class="search-box">
@@ -73,8 +69,6 @@
             </div>
         {% endif %}
       </div>
-      <!-- / .search-cart -->
-
     </div>
   </div>
    {% if social_networks !='' %}
@@ -82,11 +76,7 @@
           {{ social_networks|t }}
         </div>
   {% endif %}
-
-  <!-- /.social-menu -->
-
 </header>
-<!-- /.site-header .style-01 -->
 
 <nav id="primary-menu" class="primary-menu_style-01 hidden-md-down">
   <div class="container">
@@ -99,7 +89,6 @@
     </div>
   </div>
 </nav>
-<!-- /.primary-menu -->
 
 {% elseif header_style == 'page-home02'%}
     {% if page.left_pre_header or page.left_pre_header %}

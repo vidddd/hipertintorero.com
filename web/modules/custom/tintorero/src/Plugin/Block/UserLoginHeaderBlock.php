@@ -11,11 +11,11 @@ use Drupal\Core\Session\AccountInterface;
  * Provides a block with a simple text.
  *
  * @Block(
- *   id = "whatsapp_block",
- *   admin_label = @Translation("Whatsapp Block"),
+ *   id = "user_login_header_block",
+ *   admin_label = @Translation("User Login Header Block"),
  * )
  */
-class WhatsappBlock extends BlockBase
+class UserLoginHeaderBlock extends BlockBase
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,7 @@ class WhatsappBlock extends BlockBase
     public function build()
     {
 
-        return ['#markup' => '9999999999999999999999',];
+        return ['#markup' => '',];
     }
 
     /**
@@ -48,6 +48,6 @@ class WhatsappBlock extends BlockBase
      */
     public function blockSubmit($form, FormStateInterface $form_state)
     {
-        $this->configuration['whatsapp_block_settings'] = $form_state->getValue('whatsapp_block_settings');
+        $this->configuration['user_login_header_block_settings'] = $form_state->getValue('user_login_header_block_settings');
     }
 }

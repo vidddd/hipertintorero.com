@@ -41,19 +41,22 @@
     }
   });
 
-  /*--------------------------------------------*/
-  /* ---------------- Mini Cart ----------------*/
-  /*--------------------------------------------*/
   var cartIcon = $('.mini-cart__button');
   var cartBox = $('.mini-cart__content');
-  var isOpen = false;
+  var loginIcon = $('.user_login__button');
+  var loginBox = $('.user_login__content');
+  var isOpenCart = false;
+  var isOpenUser = false;
+
   cartIcon.on('click', function(){
-    if(isOpen == false){
+    if(isOpenCart == false){
+      loginBox.removeClass('user-login__content-open');
+      isOpenUser = false;
       cartBox.addClass('mini-cart__content-open');
-      isOpen = true;
+      isOpenCart = true;
     } else {
       cartBox.removeClass('mini-cart__content-open');
-      isOpen = false;
+      isOpenCart = false;
     }
   });
   cartIcon.on('mouseup', function(){
@@ -62,24 +65,37 @@
   cartBox.on('mouseup', function(){
     return false;
   });
-  $(document).on('mouseup', function(){
-    if(isOpen == true){
-      cartIcon
-        .css('display','block')
-        .click();
+  
+
+  loginIcon.on('click', function(){
+    if(isOpenUser == false){
+      cartBox.removeClass('mini-cart__content-open');
+      isOpenCart = false;
+      loginBox.addClass('user-login__content-open');
+      isOpenUser = true;
+    } else {
+      loginBox.removeClass('user-login__content-open');
+      isOpenUser = false;
     }
+  });
+  loginIcon.on('mouseup', function(){
+    return false;
+  });
+  loginBox.on('mouseup', function(){
+    return false;
   });
 
   $.scrollUp({
-    scrollName: 'scrollUp', // Element ID
-    topDistance: '300', // Distance from top before showing element (px)
-    topSpeed: 300, // Speed back to top (ms)
-    animation: 'fade', // Fade, slide, none
-    animationInSpeed: 500, // Animation in speed (ms)
-    animationOutSpeed: 500, // Animation out speed (ms)
-    scrollText: '<i class="fa fa-angle-up"></i>', // Text for element
-    activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+    scrollName: 'scrollUp', 
+    topDistance: '300', 
+    topSpeed: 300, 
+    animation: 'slide', 
+    animationInSpeed: 500, 
+    animationOutSpeed: 500, 
+    scrollText: '<i class="fa fa-angle-up"></i>', 
+    activeOverlay: false,
   });
+  
   $('.thumblink').click(function(e){
       $('.attachment-shop-single').hide();
       $('.imagen'+$(this).attr('rel')).fadeIn(1000);

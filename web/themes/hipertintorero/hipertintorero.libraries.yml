@@ -1,12 +1,10 @@
 global-styling:
   css:
     theme:
-      #fonts/icon-7/css/pe-icon-7-stroke.css: {}
-      #fonts/icon-7/css/helper.css: {}
+      components/bootstrap/css/bootstrap.css: {}
       fonts/renovation/icon-font-renovation.css: {}
       components/mmenu/jquery.mmenu.all.css: {}
       components/font-awesome/css/font-awesome.css: {}
-      components/bootstrap/css/bootstrap.css: {}
       components/owl.carousel/assets/owl.carousel.css: {}
       components/owl.carousel/assets/owl.theme.default.css: {}
       components/slider/slider.css: {}
@@ -36,5 +34,12 @@ revolution-slider:
     components/slider/extensions/revolution.extension.navigation.min.js: { scope: footer }
     components/slider/extensions/revolution.extension.parallax.min.js: { scope: footer }
     components/slider/extensions/revolution.extension.slideanims.min.js: { scope: footer }
-    components/slider/extensions/revolution.extension.video.min.js: { scope: footer }
     js/slider.js: { scope: footer }
+
+bootstrap-lightbox:
+  css:
+    theme:
+      components/bootstrap-lightbox/bootstrap-lightbox.min.css: {}
+  js:
+    components/bootstrap-lightbox/bootstrap-lightbox.min.js: { scope: footer }
+

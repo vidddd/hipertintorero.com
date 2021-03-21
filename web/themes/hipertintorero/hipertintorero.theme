@@ -10,7 +10,7 @@ function hipertintorero_preprocess_page(&$vars)
   } else {
     $vars['title'] = $vars['page']['#title'];
   }
-  $menu_name = "main"; // I think
+  $menu_name = "main";
   $menu_tree = \Drupal::service('menu.link_tree');
   $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
   $parameters->setMaxDepth(2)
@@ -22,12 +22,25 @@ function hipertintorero_preprocess_page(&$vars)
   );
   $tree = $menu_tree->transform($tree, $manipulators);
   $vars['mainmenu'] = $menu_tree->build($tree);
+  // login header block
+  if ($vars['user']->isAuthenticated()) {
+    $user_logged_in_name = $vars['user']->getDisplayName();
+    $vars['user_id'] = $vars['user']->id();
+    $vars['user_logged_in_name'] = ucfirst($user_logged_in_name);
+    $user_logged = $vars['user']->isAuthenticated();
+    $vars['user_logged'] = $user_logged;
+  }
 }
+
 
 function hipertintorero_page_attachments_alter(&$page)
 {
   if (\Drupal::service('path.matcher')->isFrontPage())
     $page['#attached']['library'][] = 'hipertintorero/revolution-slider';
+
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.commerce_product.canonical') {
+    //$page['#attached']['library'][] = 'hipertintorero/bootstrap-lightbox';
+  }
 }
 
 function hipertintorero_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
@@ -99,7 +112,6 @@ function hipertintorero_preprocess_block(&$vars)
     $vars['pre'] = $pre;
   }
 }
-
 /**
  * Prepares variables for the cart block element template.
  */
@@ -112,4 +124,24 @@ function hipertintorero_preprocess_commerce_cart_block(&$variables)
     $urlpagar = Url::fromUri($checkout_path);
     $variables['urlpagar'] = $urlpagar;
   }
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function hipertintorero_preprocess_menu_local_task(&$vars)
+{
+  if (array_key_exists('is_active', $vars)) {
+    $vars['attributes']['class'][] = 'tab-is-active';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hipertintorero_preprocess_commerce_product(array &$vars)
+{
+  // para el enlace de enviar por email
+  $product = $vars['elements']['#commerce_product'];
+  $vars['titulo'] = $product->getTitle() . ' - Hiper Tintorero';
 }

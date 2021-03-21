@@ -1,10 +1,11 @@
 name: hipertintorero
 type: theme
-description: 'Thema de hipertintorero.com 2'
+description: 'Theme de hipertintorero.com'
 version: 1.0
 core: 8.x
 regions:
   header: Header
+  header_login: Header Login
   page_top: 'Page Top'
   primary_menu: 'Primary Menu'
   secondary_menu: 'Secondary Menu'

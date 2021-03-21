@@ -47,7 +47,7 @@
 <div class="site">
   <header class="site-header style-01">
     <div class="container">
-      <div class="row row-xs-center"><div class="col-xs-12 col-lg-3 site-branding">
+      <div class="row row-xs-center"><div class="col-xs-12 col-lg-2 site-branding">
           <a href="{{ front_page }}"><img src="{{ base_path }}themes/hipertintorero/images/hiper-tintorero.png" width="200" alt="Hiper Tintorero logotipo">
           </a>
         </div>
@@ -59,13 +59,12 @@
               {{ mainmenu }}
           </nav>       
            </div>
-        <div class="col-xs-12 col-sm-9 col-lg-7 extra-info">
+          <div class="col-xs-12 col-sm-9 col-lg-8 extra-info">
           <div class="row">
             <div class="col-sm-5">
               <i class="fa fa-phone"></i>
               <div class="phone">
-                <h3>91 569 52 57</h3>
-                </div>
+                <h3>91 569 52 57</h3></div>
             </div>
             <div class="col-sm-7 col-md-6">
               <i class="fa fa-home"></i>
@@ -78,6 +77,34 @@
         </div>
         <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right">
           {{ page.header }}
+          <div class="user-header-box">
+            <div class="user_login__button">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="user_login__content">
+                <div class="user-login-header-block">
+                  {% if user_logged %}
+                    <div class="user-is-logged">
+                      <span class="login__username">Hola !! <strong>{{ user_logged_in_name }}</strong></span>
+                      <hr>
+                      <span class="site-header__icon icon-keyboard_arrow_down"></span>
+                      <aside id="logged-user" class="logged-user">
+                        <nav class="logged-user__links">
+                          <a href="{{ url('user.page') }}" title="Pagina de perfil de usuario">Perfil de usuario</a>
+                          <a href="{{ path('entity.user.edit_form', {'user': user_id }) }}" title="Datos de cliente">Datos de cliente</a>
+                          <a href="{{ path('view.commerce_user_orders.order_page', {'user': user_id }) }}" title="Pedidos">Pedidos</a>
+                        </nav>
+                        <div class="logged-user__logout">
+                          <a href="{{ url('user.logout') }}" title="Cerrar Sesion de usuario" class="btn btn--primary btn--block">Salir</a>
+                        </div>
+                      </aside>
+                    </div>
+                  {% else %}
+                        {{ page.header_login }}
+                  {% endif %}
+                </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -170,6 +197,6 @@
       </div>
     </div>
   </footer>{% if page.footer %}{{ page.footer }}{% endif %}
-  <div class="copyright"><div class="container"><div class="row"><div class="col-xs-12">&copy; 2020 Hiper Tintorero S.L.</div></div></div>
+  <div class="copyright"><div class="container"><div class="row"><div class="col-xs-12">&copy; 2021 Hiper Tintorero S.L.</div></div></div>
   </div>
 </div>
