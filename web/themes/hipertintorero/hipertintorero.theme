@@ -39,7 +39,7 @@ function hipertintorero_page_attachments_alter(&$page)
     $page['#attached']['library'][] = 'hipertintorero/revolution-slider';
 
   if (\Drupal::routeMatch()->getRouteName() == 'entity.commerce_product.canonical') {
-    //$page['#attached']['library'][] = 'hipertintorero/bootstrap-lightbox';
+    $page['#attached']['library'][] = 'hipertintorero/bootstrap-lightbox';
   }
 }
 
@@ -144,4 +144,12 @@ function hipertintorero_preprocess_commerce_product(array &$vars)
   // para el enlace de enviar por email
   $product = $vars['elements']['#commerce_product'];
   $vars['titulo'] = $product->getTitle() . ' - Hiper Tintorero';
+
+  // Tiene oferta el producto ?
+  $product_variation = $vars['elements']['#commerce_product']->getDefaultVariation();
+  if (!empty($product_variation->get('list_price')->getValue())) {
+    $vars['oferta'] = "4444";
+  } else {
+    $vars['oferta'] = null;
+  }
 }

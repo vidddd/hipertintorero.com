@@ -2,4 +2,9 @@ services:
   tintorero.subscriber:
     class: Drupal\tintorero\EventSubscriber\NifEventSubscriber
     tags:
-      - {name: event_subscriber} 
+      - { name: event_subscriber } 
+  tintorero.oferta_resolver:
+    class: Drupal\tintorero\Resolvers\OfertaResolver
+    arguments: ['@request_stack']
+    tags:
+      - { name: tintorero.oferta_resolver, priority: 600 }

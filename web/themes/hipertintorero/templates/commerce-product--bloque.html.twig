@@ -3,6 +3,13 @@
   <img src="{{ file_url(product.field_images['#items'].entity.uri.value) }}" alt="">
   <span class="product-title">{{ titulo|raw }}</span>
 </a>
-<div class="price">
-  <span class="amount">{{ product.variation_price }}</span>
-</div>
+ {% if oferta %}
+    <div class="price-oferta">
+      <span class="amount">{{ product.variation_price }}</span>
+      <span class="oferta">{{ product.variation_list_price }}</span>
+    </div>
+ {% else %}
+    <div class="price">
+      <span class="amount">{{ product.variation_price }}</span>
+    </div>
+ {% endif %}

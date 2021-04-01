@@ -101,4 +101,5 @@
       $('.imagen'+$(this).attr('rel')).fadeIn(1000);
       e.preventDefault();
   });
+
 })(jQuery);

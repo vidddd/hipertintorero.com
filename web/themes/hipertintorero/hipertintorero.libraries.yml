@@ -42,4 +42,6 @@ bootstrap-lightbox:
       components/bootstrap-lightbox/bootstrap-lightbox.min.css: {}
   js:
     components/bootstrap-lightbox/bootstrap-lightbox.min.js: { scope: footer }
+  dependencies:
+    - hipertintorero/global-styling
 

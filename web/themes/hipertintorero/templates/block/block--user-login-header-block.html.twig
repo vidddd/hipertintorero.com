@@ -1,0 +1,28 @@
+<div class="user-header-box">
+    <div class="user_login__button">
+        <i class="fa fa-user"></i>
+    </div>
+    <div class="user_login__content">
+         <div class="user-login-header-block">
+         {% if user_logged %}
+          <div class="user-is-logged">
+            <span class="login__username">{{ user_logged_in_name }}</span>
+            <span class="site-header__icon icon-keyboard_arrow_down"></span>
+            <aside id="logged-user" class="logged-user">
+              <nav class="logged-user__links">
+                <a href="{{ url('user.page') }}" title="Pagina de perfil de usuario">Perfil de usuario</a>
+                <a href="{{ path('entity.user.edit_form', {'user': user_id }) }}" title="Datos de cliente">Datos de cliente</a>
+                <a href="{{ path('view.commerce_user_orders.order_page', {'user': user_id }) }}" title="Pedidos">Pedidos</a>
+              </nav>
+              <div class="logged-user__logout">
+                <a href="{{ url('user.logout') }}" title="Cerrar Sesion de usuario" class="btn btn--primary btn--block">Salir</a>
+              </div>
+            </aside>
+          </div>
+        {% endif %}
+        {% if not user_logged %}
+
+				{% endif %}
+          </div>
+    </div>
+</div>

@@ -38,16 +38,23 @@
 </div>
 <div class="col-sm-6">
   <h1 class="product-title">{{ product.title }}</h1>
-    <!--
-    <div class="price"><span class="amount old-list-price">{# product.variation_price #}</span>
-                      <span class="amount onsale list-price">{# product.variation_list_price #}</span>
-    </div>
-     -->
-    <div class="price"><span class="amount">{{ product.variation_price }}</span></div>
-  <div class="description">
+      <div class="container">
+        {% if oferta %}
+          <div class="price-oferta row">
+              <span class="col amount">{{ product.variation_price }}</span>
+              <span class="col oferta">{{ product.variation_list_price }}</span>
+          </div>
+        {% else %}
+          <div class="price row">
+              <span class="col amount">{{ product.variation_price }}</span>
+          </div>
+        {% endif %}
+      </div>
+  <div class="description"> 
     {{ product.field_descripcion_corta }}
   </div>
-  <hr>{{ product.variations }} <a data-toggle="lightbox" href="#contactoProducto">Saber más</a>
+  <hr>{{ product.variations }} 
+  <a data-toggle="lightbox" class="" href="#contactoProducto">Saber más</a> 
   <div class="product-meta">
     <span>categoria:
       {{ product.field_category }}
@@ -61,7 +68,7 @@
       <a title="Compartir en Facebook" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank"><i class="fa fa-facebook"></i></a>
       <a title="Compartir en twitter" class="twitter" href="https://twitter.com/home?status={{ url }}" target="_blank"><i class="fa fa-twitter"></i></a>
       <a title="Compartir en pinterest" class="pinterest" href="https://pinterest.com/pin/create/button/?url={{ url }}" target="_blank"><i class="fa fa-pinterest"></i></a>
-      <a title="enviar por email" class="paper-plane" href="mailto:?Subject={{ titulo|url_encode }}&body={{ url }}" target="_blank"><i class="fa fa-send"></i></a>  
+      <a title="Enviar por email" class="paper-plane" href="mailto:?Subject={{ titulo|url_encode }}&body={{ url }}" target="_blank"><i class="fa fa-send"></i></a>  
       <a title="Compartir en linkedin" class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ url }}" target="_blank"><i class="fa fa-linkedin"></i></a>
       <a title="Compartir en Whatsapp" class="whatsapp" href="https://wa.me/whatsappphonenumber/?text={{ url }}" target="_blank"><i class="fa fa-whatsapp"></i></a>
     </div>
@@ -72,7 +79,7 @@
         <div class="panel-heading" role="tab" id="headingOne">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              Descripcion
+              Descripci&oacute;n
             </a>
           </h4>
         </div>
