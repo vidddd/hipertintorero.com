@@ -78,8 +78,8 @@
         <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right">
           {{ page.header }}
           <div class="user-header-box">
-            <div class="user_login__button">
-                <i class="fa fa-user"></i>
+            <div class="search-box">
+              <span class="search-box-icon"><i class="fa fa-search"></i></span>
             </div>
             <div class="user_login__content">
                 <div class="user-login-header-block">
@@ -128,7 +128,8 @@
       </div>
       {% else %} {# pagina de producto sin sidebar #}
        <div class="col-xs-12">
-       {{ page.content }}</div>
+       {{ page.content }}
+       </div>
       {% endif %}
     </div>
    </div>
@@ -139,6 +140,17 @@
             <div class="row">
               <div class="col-xs-12">
                 {{ page.sub_content }}
+              </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+   {% if page.search %}
+      <section class="subcontent">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                {{ page.search }}
               </div>
             </div>
         </div>

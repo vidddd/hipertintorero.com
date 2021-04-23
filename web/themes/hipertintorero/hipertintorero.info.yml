@@ -15,6 +15,7 @@ regions:
   footer: 'Footer'
   suscribe: 'Suscribe'
   sub_content: 'Sub Content'
+  search: 'Search'
  
 libraries:
   - 'hipertintorero/global-styling'

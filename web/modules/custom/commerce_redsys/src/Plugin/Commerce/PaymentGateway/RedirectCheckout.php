@@ -4,13 +4,13 @@ namespace Drupal\commerce_redsys\Plugin\Commerce\PaymentGateway;
 
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OffsitePaymentGatewayBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
+//use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\commerce_order\Entity\OrderInterface;
-use Drupal\Component\Datetime\TimeInterface;
+//use Drupal\Component\Datetime\TimeInterface;
 use Drupal\commerce_payment\Exception\DeclineException;
 use Drupal\commerce_payment\Exception\InvalidResponseException;
-use Drupal\commerce_payment\PaymentMethodTypeManager;
-use Drupal\commerce_payment\PaymentTypeManager;
+//use Drupal\commerce_payment\PaymentMethodTypeManager;
+//use Drupal\commerce_payment\PaymentTypeManager;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
 use Drupal\commerce_price\Price;

@@ -17,7 +17,7 @@ class RedsysPaymentForm extends BasePaymentOffsiteForm {
     $payment = $this->entity;
     /** @var \Drupal\commerce_payplug\Plugin\Commerce\PaymentGateway\OffsiteOffsitePayPlug $payment_gateway_plugin */
     $payment_gateway_plugin = $payment->getPaymentGateway()->getPlugin();
-    $payment_gateway_configuration = $payment_gateway_plugin->getConfiguration();
+    //$payment_gateway_configuration = $payment_gateway_plugin->getConfiguration();
     $red = new RedsysAPI;
     // Valores de entrada que no hemos cmbiado para ningun ejemplo
   	$fuc="285964623";
@@ -58,7 +58,7 @@ class RedsysPaymentForm extends BasePaymentOffsiteForm {
         $form[$name] = ['#type' => 'hidden', '#value' => $value];
       }
     }
-  //  $redirect_url = 'https://sis-t.redsys.es:25443/sis/realizarPago';
+
      $redirect_url = 'https://sis.redsys.es/sis/realizarPago';
     return $this->buildRedirectForm($form, $form_state, $redirect_url, $data, self::REDIRECT_POST);
   }

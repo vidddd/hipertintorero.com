@@ -5,3 +5,19 @@ tintorero.contacto:
     _title: 'Contacto'
   requirements:
     _permission: 'access content'
+
+tintorero.admin:
+  path: '/admin/tintorero'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Hiper Tintorero'
+  requirements:
+    _permission: 'administer tintorero'
+
+tintorero.config:
+  path: '/admin/tintorero/config'
+  defaults:
+    _form: '\Drupal\tintorero\Form\TintoreroConfiguracionForm'
+    _title: 'Configuracion'
+  requirements:
+    _permission: 'administer tintorero'
