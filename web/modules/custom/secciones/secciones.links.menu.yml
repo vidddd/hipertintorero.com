@@ -1,0 +1,6 @@
+entity.seccion_entity.collection:
+  title: 'Secciones'
+  route_name: entity.seccion_entity.collection
+  description: 'List Seccion entity (bundles)'
+  parent: tintorero.admin
+  weight: 99

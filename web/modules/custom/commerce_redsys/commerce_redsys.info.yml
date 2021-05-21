@@ -1,0 +1,6 @@
+name: Commerce Redsys
+description: Integrate Redsys Payment
+package: Custom
+type: module
+version: 1.0
+core: 8.x

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains secciones.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function secciones_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the secciones module.
+    case 'help.page.secciones':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Secciones de hipertintorero.com') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function secciones_theme() {
+  return [
+    'secciones' => [
+      'render element' => 'children',
+    ],
+  ];
+}

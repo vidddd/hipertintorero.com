@@ -1,0 +1,5 @@
+entity.seccion_entity.add_form:
+  route_name: entity.seccion_entity.add_form
+  title: 'Nueva Seccion'
+  appears_on:
+    - entity.seccion_entity.collection

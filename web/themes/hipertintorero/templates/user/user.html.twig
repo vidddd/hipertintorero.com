@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ */
+#}
+{{ dump(content.customer_profiles) }}
+<article class="table-container user-data">
+	<table class="table-responsive table-responsive--vertical-header">
+		<tbody>
+			<tr>
+				<th scope="row">Nombre de Usuario</th>
+				<td data-th="Nombre de Usuario">{{ username }}</td>
+		  </tr>
+			<tr>
+				<th scope="row">Email</th>
+				<td data-th="Email">{{ email }}</td>
+			</tr>
+			<tr>
+				<th>Nombre</th>
+				<td data-th="Nombre">{{ content.field_nombre }}</td>
+			</tr>
+			<tr>
+				<th>Apellidos</th>
+				<td data-th="Apellidos">{{ content.field_apellidos }}</td>
+			</tr>
+			<tr>
+				<th>Dirección</th>
+				<td data-th="Dirección">{{ content.field_domicilio }}</td>
+			</tr>
+			<tr>
+				<th>Código Postal</th>
+				<td data-th="Código Postal">{{ content.field_codigo_postal }}</td>
+			</tr>
+						<tr>
+							<th>Provincia</th>
+							<td data-th="Provincia">{{ content.field_provincia }}</td>
+						</tr>
+						<tr>
+							<th>Documento</th>
+							<td data-th="Documento">{{ content.field_identificador }}</td>
+						</tr>
+						<tr>
+							<th>Fecha de nacimiento</th>
+							<td data-th="Fecha de nacimiento">{{ content.field_fecha_nacimiento }}</td>
+						</tr>
+						<tr>
+							<th>Teléfono</th>
+							<td data-th="Teléfono">{{ content.field_telefono }}</td>
+						</tr>
+						<tr>
+							<th>Cuenta Bancaria</th>
+							<td data-th="Cuenta Bancaria">{{ content.field_cuenta_bancaria }}</td>
+						</tr>
+		</tbody>
+	</table>
+</article>

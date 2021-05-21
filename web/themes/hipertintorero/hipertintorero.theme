@@ -147,7 +147,9 @@ function hipertintorero_preprocess_commerce_product(array &$vars)
 
   // Tiene oferta el producto ?
   $product_variation = $vars['elements']['#commerce_product']->getDefaultVariation();
+
   if (!empty($product_variation->get('list_price')->getValue())) {
+    //dump($product_variation->get('list_price')->getValue()[0]);
     $vars['oferta'] = "4444";
   } else {
     $vars['oferta'] = null;

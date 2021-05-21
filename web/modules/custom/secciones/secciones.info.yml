@@ -1,0 +1,5 @@
+name: 'secciones'
+type: module
+description: 'Secciones de hipertintorero.com'
+core: 8.x
+package: 'Custom'

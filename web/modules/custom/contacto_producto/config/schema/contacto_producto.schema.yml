@@ -1,0 +1,7 @@
+block.settings.contacto_producto:
+  type: block_settings
+  label: 'Contacto Producto block'
+  mapping:
+    foo:
+      type: string
+      label: Foo
