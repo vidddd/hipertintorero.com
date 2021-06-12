@@ -119,8 +119,14 @@ input[type="search"]::-webkit-search-decoration {
 fieldset {
   margin: 0 2px 15px;
   padding: 0.35em 1.2em 0.75em;
-  border: 1px solid #c0c0c0;
+  border: 1px solid #7ab0cf;
 }
+.fieldset-legend {
+  padding: 0 10px;
+  font-size: 19px;
+  color: #39596b;
+}
+
 legend {
   padding: 0;
   border: 0;

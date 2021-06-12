@@ -27,7 +27,6 @@ class CommerceRedsysConfiguracionForm extends ConfigFormBase
     {
         $config = $this->config('commerce_redsys.configuracion');
 
-
         $form['configuracion'] = array(
             '#type'  => 'fieldset',
             '#title' => $this->t('Configuraciones de La Pasarela de Pago Commerce Redsys'),

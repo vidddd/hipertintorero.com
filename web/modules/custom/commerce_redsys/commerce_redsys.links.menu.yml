@@ -1,7 +1,0 @@
-
-commerce_redsys.configuracion:
-  title: 'Commerce Redsys'
-  route_name: commerce_redsys.config
-  description: 'Configuraciones de Commerce Redsys.'
-  parent: tintorero.admin
-  weight: -4

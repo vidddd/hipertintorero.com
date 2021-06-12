@@ -1,9 +1,0 @@
-
-commerce_redsys.config:
-  path: '/admin/tintorero/commerce_redsys'
-  defaults:
-    _form: '\Drupal\commerce_redsys\Form\CommerceRedsysConfiguracionForm'
-    _title: 'Commerce Redsys'
-  requirements:
-    _permission: 'administer tintorero'
-

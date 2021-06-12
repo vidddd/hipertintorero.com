@@ -6,24 +6,9 @@ use Drupal\commerce_payment\Exception\PaymentGatewayException;
 use Drupal\commerce_payment\PluginForm\PaymentOffsiteForm as BasePaymentOffsiteForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
-use Drupal\Core\Config\ConfigFactoryInterface;
 
 class RedsysPaymentForm extends BasePaymentOffsiteForm
 {
-  /**
-   * The Config Factory.
-   *
-   * @var Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * Class constructor.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory)
-  {
-    $this->configFactory = $config_factory;
-  }
 
   /**
    * {@inheritdoc}
@@ -31,47 +16,66 @@ class RedsysPaymentForm extends BasePaymentOffsiteForm
   public function buildConfigurationForm(array $form, FormStateInterface $form_state)
   {
     $form = parent::buildConfigurationForm($form, $form_state);
-    $config = $this->configFactory->get('commerce_redsys.configuracion');
+    $config = $this->getConfiguration();
 
     /** @var \Drupal\commerce_payment\Entity\PaymentInterface $payment */
     $payment = $this->entity;
-    /** @var \Drupal\commerce_payplug\Plugin\Commerce\PaymentGateway\OffsiteOffsitePayPlug $payment_gateway_plugin */
+    /** @var \Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OffsitePaymentGatewayInterface $payment_gateway_plugin */
     $payment_gateway_plugin = $payment->getPaymentGateway()->getPlugin();
-    //$payment_gateway_configuration = $payment_gateway_plugin->getConfiguration();
-    $red = new RedsysAPI;
-    $urlOK = $form['#return_url'];
-    $urlKO = $form['#cancel_url'];
+    try {
+      $red = new RedsysAPI;
+      $urlOK = $form['#return_url'];
+      $urlKO = $form['#cancel_url'];
 
-    //estos dos valores los vamos cambiando en cada ejemplo
-    $id = "0000" . $payment->getOrder()->id(); //el valor que le damos en cada ejemplo
-    $amount = $payment->getAmount()->getNumber() * 100; //el valor que le damos en cada ejemplo
+      $id = "0000" . $payment->getOrder()->id();
+      $amount = $payment->getAmount()->multiply(100)->getNumber();
 
-    $red->setParameter('DS_MERCHANT_AMOUNT', $amount);
-    $red->setParameter('DS_MERCHANT_ORDER', $id);
-    $red->setParameter('DS_MERCHANT_MERCHANTCODE', $config->get('fuc'));
-    $red->setParameter('DS_MERCHANT_CURRENCY', $config->get('moneda'));
-    $red->setParameter('DS_MERCHANT_TRANSACTIONTYPE', $config->get('trans'));
-    $red->setParameter('DS_MERCHANT_TERMINAL', $config->get('terminal'));
-    $red->setParameter('DS_MERCHANT_MERCHANTURL', $config->get('merchant_url'));
-    $red->setParameter('DS_MERCHANT_URLOK', $urlOK);
-    $red->setParameter('DS_MERCHANT_URLKO', $urlKO);
+      // URL for receive HTTP notificacion after checkout
+      $merchant_url = $payment_gateway_plugin->getNotifyUrl()->toString(); // .....payment/notify/__pluginname__
 
-    $params = $red->createMerchantParameters();
-    $clave = '';
+      $red->setParameter('DS_MERCHANT_AMOUNT', $amount);
+      $red->setParameter('DS_MERCHANT_ORDER', $id);
+      $red->setParameter('DS_MERCHANT_MERCHANTCODE', $config['merchant_code']);
+      $red->setParameter('DS_MERCHANT_CURRENCY', $config['currency']);
+      $red->setParameter('DS_MERCHANT_TRANSACTIONTYPE', $config['transaction_type']);
+      $red->setParameter('DS_MERCHANT_TERMINAL', $config['terminal']);
+      $red->setParameter('DS_MERCHANT_MERCHANTURL', $merchant_url);
+      $red->setParameter('DS_MERCHANT_URLOK', $urlOK);
+      $red->setParameter('DS_MERCHANT_URLKO', $urlKO);
 
-    $signature = $red->createMerchantSignature($clave);
-    $data = [
-      'Ds_SignatureVersion' => $config->get('version'),
-      'Ds_MerchantParameters' => $params,
-      'Ds_Signature' => $signature
-    ];
+      $params = $red->createMerchantParameters();
 
-    foreach ($data as $name => $value) {
-      if (isset($value)) {
-        $form[$name] = ['#type' => 'hidden', '#value' => $value];
-      }
+      $signature = $red->createMerchantSignature($config['signature']);
+
+      $data = [
+        'Ds_SignatureVersion' => $config['signatureversion'],
+        'Ds_MerchantParameters' => $params,
+        'Ds_Signature' => $signature
+      ];
+    } catch (\Exception $exception) {
+      throw new PaymentGatewayException('Error Building Payment form.');
     }
+
+    if ($config['mode'] == 'test') {
+      $redirect_url = $config['url_test'];
+    } else {
+      $redirect_url = $config['url_live'];
+    }
+
     return $this->buildRedirectForm($form, $form_state, $redirect_url, $data, self::REDIRECT_POST);
+  }
+  /**
+   * @return array
+   */
+  private function getConfiguration()
+  {
+    /** @var \Drupal\commerce_payment\Entity\PaymentInterface $payment */
+    $payment = $this->entity;
+
+    /** @var \Drupal\commerce_quickpay_gateway\Plugin\Commerce\PaymentGateway\RedirectCheckout $payment_gateway_plugin */
+    $payment_gateway_plugin = $payment->getPaymentGateway()->getPlugin();
+
+    return $payment_gateway_plugin->getConfiguration();
   }
 
   /**
@@ -79,6 +83,6 @@ class RedsysPaymentForm extends BasePaymentOffsiteForm
    */
   public function getFormId()
   {
-    return 'redsys_payment_form';
+    return 'commerce_redsys_payment_form';
   }
 }
