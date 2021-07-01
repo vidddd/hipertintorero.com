@@ -14,9 +14,10 @@ use Drupal\commerce_payment\PaymentTypeManager;
 use Drupal\commerce_payment\PaymentMethodTypeManager;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
+use Drupal\commerce_price\Price;
 
 /**
- * Provides the Redsys offsite Checkout payment gateway.
+ * Provides the Drupal Commerce Redsys offsite Checkout payment gateway.
  *
  * @CommercePaymentGateway(
  *   id = "redsys_redirect_checkout",
@@ -86,11 +87,11 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
       'url_live' => '',
       'signatureversion' => '',
       'signature' => '',
-      'merchant_url' => '',
       'merchant_code' => '',
       'terminal' => '',
       'currency' => '',
       'transaction_type' => '0',
+      'debug_log' => null
     ] + parent::defaultConfiguration();
   }
 
@@ -130,14 +131,6 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
       '#required' => TRUE,
     ];
 
-    $form['merchant_url'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Merchant Url'),
-      '#description' => $this->t("The Url Merchant, to receive POST notifications"),
-      '#default_value' => $this->configuration['merchant_url'],
-      '#required' => TRUE,
-    ];
-
     $form['merchant_code'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Merchant Code'),
@@ -157,7 +150,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
     $form['currency'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Currency'),
-      '#description' => $this->t("The Currency code"),
+      '#description' => $this->t("The Currency code, ISO4217 format"),
       '#default_value' => $this->configuration['currency'],
       '#required' => TRUE,
     ];
@@ -169,7 +162,23 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
       '#default_value' => $this->configuration['transaction_type'],
       '#required' => TRUE,
     ];
+    $form['debug_log'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable verbose logging for debugging.'),
+      '#return_value' => '1',
+      '#default_value' => $this->configuration['debug_log'],
+    ];
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state)
+  {
+    parent::validateConfigurationForm($form, $form_state);
+
+    // TODO: validate urls, etc...
   }
 
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state)
@@ -181,11 +190,11 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
       $this->configuration['url_live'] = $values['url_live'];
       $this->configuration['signatureversion'] = $values['signatureversion'];
       $this->configuration['signature'] = $values['signature'];
-      $this->configuration['merchant_url'] = $values['merchant_url'];
       $this->configuration['merchant_code'] = $values['merchant_code'];
       $this->configuration['terminal'] = $values['terminal'];
       $this->configuration['currency'] = $values['currency'];
       $this->configuration['transaction_type'] = $values['transaction_type'];
+      $this->configuration['debug_log'] = $values['debug_log'];
     }
   }
   /**
@@ -196,11 +205,9 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
 
     $orderid = $order->id();
     if (empty($orderid)) {
-      throw new PaymentGatewayException('Invoice id missing for this transaction.');
+      throw new PaymentGatewayException($this->t('Invoice id missing for this transaction.'));
     }
     $this->logger->log('info', 'onReturn');
-    // Common response processing for both redirect back and async notification.
-    //$payment = $this->processFeedback($request);
 
     // Do not update payment state here - it should be done from the received
     // notification only, and considering that usually notification is received
@@ -222,13 +229,15 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
    */
   public function onNotify(Request $request)
   {
-    if (!$responseData = json_decode($request->getContent(), TRUE)) {
-      // 1 = $request->getContent()
-      // throw new PaymentGatewayException('Response data missing on notify, aborting.');
-      throw new PaymentGatewayException(print_r($request->getPathInfo()));
+
+    if ($this->debugEnabled()) {
+      $this->logger->debug(print_r($request->getContent(), TRUE));
     }
 
-    $this->logger->log('info', 'onNotify2');
+    if (!$responseData = $request->getContent()) {
+      throw new PaymentGatewayException($this->t('Response data from TPV missing, aborting.'));
+    }
+
     $this->processFeedback($request);
   }
 
@@ -244,6 +253,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
    */
   private function processFeedback(Request $request)
   {
+
     $params = [
       'Ds_SignatureVersion' => $request->get('Ds_SignatureVersion'),
       'Ds_MerchantParameters' => $request->get('Ds_MerchantParameters'),
@@ -251,69 +261,72 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
     ];
 
     if (empty($params['Ds_SignatureVersion']) || empty($params['Ds_MerchantParameters']) || empty($params['Ds_Signature'])) {
-      throw new PaymentGatewayException('Bad feedback response, missing feedback parameter.');
+      throw new PaymentGatewayException($this->t('Bad feedback response, missing feedback parameter.'));
     }
 
     // Get the payment method settings.
     $payment_method_settings = $this->getConfiguration();
 
     $red = new RedsysAPI;
-    $logger = \Drupal::logger('commerce_redsys');
-    $version = $request->query->get('Ds_SignatureVersion');
-    $signature = $request->query->get('Ds_Signature');
-    $params = $request->query->get('Ds_MerchantParameters');
+    // $version = $params['Ds_SignatureVersion']; not in use
+    $ds_signature = $params['Ds_Signature'];
+    $params = $params['Ds_MerchantParameters'];
+    $signature = $payment_method_settings['signature'];
+    $red->decodeMerchantParameters($params);
 
-    $des = $red->decodeMerchantParameters($params);
+    $signatureCalc = $red->createMerchantSignatureNotif($signature, $params);
 
-    $signatureCalculada = $red->createMerchantSignatureNotif($clave, $params);
+    if ($signatureCalc === $ds_signature) {
 
-    if ($signatureCalculada === $signature) {
-      /*
-         Ds_TransactionType:0;
-          Ds_Card_Country:724;
-          Ds_Card_Brand:1;
-          Ds_Date:27/05/2019;
-          Ds_SecurePayment:1;
-          Ds_Order:000043;
-          Ds_Hour:12:11;
-          Ds_Response:0000;
-          Ds_AuthorisationCode:041104;
-          Ds_Currency:978;
-          Ds_ConsumerLanguage:1;
-          Ds_MerchantCode:285964623;
-          Ds_Amount:17230;
-          Ds_Terminal:003;
-           */
+      $DsResponse = $red->getParameter("Ds_Response");
 
-      $codigoRespuesta = $red->getParameter("Ds_Response");
-      $authcode = $red->getParameter("Ds_AuthorisationCode");
-      $amount = $red->getParameter("Ds_Amount");
-      $order = $red->getParameter("Ds_Order");
-      $currency = $red->getParameter("Ds_Currency");
 
-      $price = strval($amount / 100);
-      //%echo $price; die;
-      $payment_storage = $this->entityTypeManager->getStorage('commerce_payment');
-      $payment = $payment_storage->create([
-        'state' => 'complete',
-        'amount' => new Price($price, "€"),
-        'currency_code' => $currency,
-        'payment_gateway' => $this->entityId,
-        'order_id' => $order,
-        'remote_id' => $authcode,
-        'remote_state' => $codigoRespuesta,
-      ]);
+      if ($this->debugEnabled()) {
+        if ($DsErrorCode = $red->getParameter("Ds_ErrorCode"))
+          $this->logger->debug("DsErrorCode " . print_r($DsErrorCode, TRUE));
+        if ($DsResponse = $red->getParameter("Ds_Response"))
+          $this->logger->debug("DsResponse " . print_r($DsResponse, TRUE));
+      }
 
-      $logger->info('Guardando informacion de Pago. Pedido:' . $order);
+      if ($DsResponse == '0000') {
 
-      $payment->save();
-      drupal_set_message('El Pago fue recibido');
+        $authcode = $red->getParameter("Ds_AuthorisationCode");
+        $amount = $red->getParameter("Ds_Amount");
+        $order = $red->getParameter("Ds_Order");
+        $currency = $red->getParameter("Ds_Currency");
 
-      $logger->info('informacion de pago guardada con exito ');
+        $price = strval($amount / 100);
 
-      return $payment;
+        $payment_storage = $this->entityTypeManager->getStorage('commerce_payment');
+        $payment = $payment_storage->create([
+          'state' => 'complete',
+          'amount' => new Price($price, "€"),
+          'currency_code' => $currency,
+          'payment_gateway' => $this->entityId,
+          'order_id' => $order,
+          'remote_id' => $authcode,
+          'remote_state' => $DsResponse,
+          'authorized' => $this->time->getRequestTime(),
+        ]);
+
+        $payment->save();
+        $this->messenger()->addStatus($this->t('The payment is received, thank you'));
+
+        return $payment;
+      }
     } else {
-      drupal_set_message('Pago no completado. Error recibiendo datos del TPV', 'error');
+      $this->messenger()->addError($this->t('No payment received, please try again or select diferent payment method'));
     }
+  }
+
+  /**
+   * Check if verbose logging enabled.
+   *
+   * @return bool
+   *   Whether debugging is enabled or not.
+   */
+  protected function debugEnabled()
+  {
+    return $this->configuration['debug_log'] == 1 ? TRUE : FALSE;
   }
 }
