@@ -17,7 +17,7 @@ use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
 use Drupal\commerce_price\Price;
 
 /**
- * Provides the Drupal Commerce Redsys offsite Checkout payment gateway.
+ * Provides the Drupal Commerce Redsys offsite redirect payment gateway.
  *
  * @CommercePaymentGateway(
  *   id = "redsys_redirect_checkout",
@@ -27,12 +27,10 @@ use Drupal\commerce_price\Price;
  *     "offsite-payment" = "Drupal\commerce_redsys\PluginForm\RedsysPaymentForm",
  *   },
  *   payment_method_types = {"credit_card"},
- *   credit_card_types = {
- *     "mastercard", "visa", "maestro"
- *   },
+ *   
  * )
  */
-class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterface
+class RedirectCheckout extends OffsitePaymentGatewayBase
 {
   /**
    * The logger.
@@ -168,6 +166,8 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
       '#return_value' => '1',
       '#default_value' => $this->configuration['debug_log'],
     ];
+    $form['mode']['#access'] = FALSE;
+    
     return $form;
   }
 
@@ -221,6 +221,9 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
    */
   public function onCancel(OrderInterface $order, Request $request)
   {
+    $this->logger->info('The user canceled payment process for order %order_id', [
+      '%order_id' => $order->id(),
+    ]);
     parent::onCancel($order, $request);
   }
 
@@ -310,12 +313,12 @@ class RedirectCheckout extends OffsitePaymentGatewayBase implements RedsysInterf
         ]);
 
         $payment->save();
-        $this->messenger()->addStatus($this->t('The payment is received, thank you'));
+        \Drupal::messenger()->addStatus($this->t('The payment is received, thank you'));
 
         return $payment;
       }
     } else {
-      $this->messenger()->addError($this->t('No payment received, please try again or select diferent payment method'));
+      \Drupal::messenger()->addError($this->t('No payment received, please try again or select diferent payment method'));
     }
   }
 
