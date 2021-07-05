@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\commerce_redsys\PluginForm;
+namespace Drupal\commerce_redsys_payment\PluginForm;
 
 use Drupal\commerce_payment\Exception\PaymentGatewayException;
 use Drupal\commerce_payment\PluginForm\PaymentOffsiteForm as BasePaymentOffsiteForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
+use Drupal\commerce_redsys_payment\RedsysAPI as RedsysAPI;
 
 class RedsysPaymentForm extends BasePaymentOffsiteForm
 {

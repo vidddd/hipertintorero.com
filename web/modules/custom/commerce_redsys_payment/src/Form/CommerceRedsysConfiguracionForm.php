@@ -1,5 +1,6 @@
 <?php
-namespace Drupal\commerce_redsys\Form;
+
+namespace Drupal\commerce_redsys_payment\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -19,13 +20,13 @@ class CommerceRedsysConfiguracionForm extends ConfigFormBase
     protected function getEditableConfigNames()
     {
         return [
-            'commerce_redsys.configuracion',
+            'commerce_redsys_payment.configuracion',
         ];
     }
 
     public function buildForm(array $form, FormStateInterface $form_state, Request $request = NULL)
     {
-        $config = $this->config('commerce_redsys.configuracion');
+        $config = $this->config('commerce_redsys_payment.configuracion');
 
         $form['configuracion'] = array(
             '#type'  => 'fieldset',
@@ -84,7 +85,7 @@ class CommerceRedsysConfiguracionForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $this->config('commerce_redsys.configuracion')
+        $this->config('commerce_redsys_payment.configuracion')
             ->set('merchant_url', $form_state->getValue('merchant_url'))
             ->set('redirect_url', $form_state->getValue('redirect_url'))
             ->set('fuc', $form_state->getValue('fuc'))

@@ -1,4 +1,4 @@
-name: Commerce Redsys
+name: Commerce Redsys Paymnet
 description: 'Redsys payment gateway for Commerce Module'
 package: Commerce
 type: module

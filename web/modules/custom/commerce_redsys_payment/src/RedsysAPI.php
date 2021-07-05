@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\commerce_redsys;
+namespace Drupal\commerce_redsys_payment;
 /**
 * NOTA SOBRE LA LICENCIA DE USO DEL SOFTWARE
 *
@@ -21,7 +21,7 @@ namespace Drupal\commerce_redsys;
 *
 * Redsys Servicios de Procesamiento, S.L., CIF B85955367
 */
-
+ 
 class RedsysAPI{
 
 	/******  Array de DatosEntrada ******/
@@ -204,5 +204,3 @@ class RedsysAPI{
 		return $this->encodeBase64($res);
 	}
 }
-
-?>

@@ -1,0 +1,5 @@
+services:
+  logger.channel.commerce_redsys_payment:
+    parent: logger.channel_base
+    arguments:
+      - 'commerce_redsys_payment'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_redsys\Plugin\Commerce\PaymentGateway;
+namespace Drupal\commerce_redsys_payment\Plugin\Commerce\PaymentGateway;
 
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OffsitePaymentGatewayBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -20,11 +20,11 @@ use Drupal\commerce_price\Price;
  * Provides the Drupal Commerce Redsys offsite redirect payment gateway.
  *
  * @CommercePaymentGateway(
- *   id = "redsys_redirect_checkout",
+ *   id = "redsys_redirect_payment_checkout",
  *   label = @Translation("Redys (Redirect to redsys)"),
  *   display_label = @Translation("Redsys"),
  *    forms = {
- *     "offsite-payment" = "Drupal\commerce_redsys\PluginForm\RedsysPaymentForm",
+ *     "offsite-payment" = "Drupal\commerce_redsys_payment\PluginForm\RedsysPaymentForm",
  *   },
  *   payment_method_types = {"credit_card"},
  *   
@@ -75,7 +75,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
       $container->get('plugin.manager.commerce_payment_type'),
       $container->get('plugin.manager.commerce_payment_method_type'),
       $container->get('datetime.time'),
-      $container->get('logger.channel.commerce_redsys')
+      $container->get('logger.channel.commerce_redsys_payment')
     );
   }
   public function defaultConfiguration()
@@ -166,8 +166,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
       '#return_value' => '1',
       '#default_value' => $this->configuration['debug_log'],
     ];
-    $form['mode']['#access'] = FALSE;
-    
+
     return $form;
   }
 

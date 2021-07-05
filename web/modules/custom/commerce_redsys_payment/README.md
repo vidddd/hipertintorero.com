@@ -1,6 +1,8 @@
-# Commerce Redsys
+# Commerce Redsys Payment
 
 This module integrates Redsys spanish payment into the Drupal Commerce 2 payment.
+
+<a href="http://www.redsys.es/index.html#descargas">Redsys api docs</a>
 
 # Requirements
 
@@ -19,8 +21,7 @@ Administration > Commerce > Configuration > Payment gateways > Add payment gatew
 
 ## Configure your TPV admin
 
-You must active the HTTP notifications, in your admin TPV panel, otherwise the module not recive the payment and not complete the checkout.
-
+You must active the HTTP notifications, in your admin TPV panel, otherwise the module not recive the payment.
 ** Online Notificacion: HTTP
 ** Sinchronization: Asynchronous
 ** URL Notificacion: Empty (This module provide this url in the request)

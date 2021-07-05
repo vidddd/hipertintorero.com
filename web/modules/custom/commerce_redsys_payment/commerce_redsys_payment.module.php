@@ -10,10 +10,10 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function commerce_redsys_help($route_name, RouteMatchInterface $route_match) {
-
+function commerce_redsys_payment_help($route_name, RouteMatchInterface $route_match)
+{
   switch ($route_name) {
-    case 'help.page.commerce_redsys':
+    case 'help.page.commerce_redsys_payment':
       $variables = [
         ':url' => 'https://pagosonline.redsys.es/descargas.html',
       ];
