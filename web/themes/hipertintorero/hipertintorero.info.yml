@@ -1,6 +1,7 @@
 name: hipertintorero
 type: theme
 description: 'Theme de hipertintorero.com'
+base theme: stable
 version: 1.0
 core: 8.x
 regions:

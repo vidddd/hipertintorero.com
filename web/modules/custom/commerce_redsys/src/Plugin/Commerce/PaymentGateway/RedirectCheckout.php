@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_redsys_payment\Plugin\Commerce\PaymentGateway;
+namespace Drupal\commerce_redsys\Plugin\Commerce\PaymentGateway;
 
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OffsitePaymentGatewayBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -20,11 +20,11 @@ use Drupal\commerce_price\Price;
  * Provides the Drupal Commerce Redsys offsite redirect payment gateway.
  *
  * @CommercePaymentGateway(
- *   id = "redsys_redirect_payment_checkout",
+ *   id = "redsys_redirect_checkout",
  *   label = @Translation("Redys (Redirect to redsys)"),
  *   display_label = @Translation("Redsys"),
  *    forms = {
- *     "offsite-payment" = "Drupal\commerce_redsys_payment\PluginForm\RedsysPaymentForm",
+ *     "offsite-payment" = "Drupal\commerce_redsys\PluginForm\RedsysPaymentForm",
  *   },
  *   payment_method_types = {"credit_card"},
  *   
@@ -75,7 +75,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
       $container->get('plugin.manager.commerce_payment_type'),
       $container->get('plugin.manager.commerce_payment_method_type'),
       $container->get('datetime.time'),
-      $container->get('logger.channel.commerce_redsys_payment')
+      $container->get('logger.channel.commerce_redsys')
     );
   }
   public function defaultConfiguration()
@@ -166,7 +166,8 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
       '#return_value' => '1',
       '#default_value' => $this->configuration['debug_log'],
     ];
-
+    $form['mode']['#access'] = FALSE;
+    
     return $form;
   }
 
@@ -282,6 +283,7 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
 
       $DsResponse = $red->getParameter("Ds_Response");
 
+
       if ($this->debugEnabled()) {
         if ($DsErrorCode = $red->getParameter("Ds_ErrorCode"))
           $this->logger->debug("DsErrorCode " . print_r($DsErrorCode, TRUE));
@@ -312,14 +314,11 @@ class RedirectCheckout extends OffsitePaymentGatewayBase
 
         $payment->save();
         \Drupal::messenger()->addStatus($this->t('The payment is received, thank you'));
-        $this->logger->info('Payment accepted for %order_id', [
-          '%order_id' => $order->id(),
-        ]);
+
         return $payment;
       }
     } else {
-
-      throw new PaymentGatewayException($this->t('Error calculating merchant params, Not payment completed'));
+      \Drupal::messenger()->addError($this->t('No payment received, please try again or select diferent payment method'));
     }
   }
 
