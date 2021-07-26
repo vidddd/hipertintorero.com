@@ -13,7 +13,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\commerce_payment\PaymentTypeManager;
 use Drupal\commerce_payment\PaymentMethodTypeManager;
 use Drupal\Component\Datetime\TimeInterface;
-use Drupal\commerce_redsys\RedsysAPI as RedsysAPI;
+use Drupal\commerce_redsys_payment\RedsysAPI as RedsysAPI;
 use Drupal\commerce_price\Price;
 
 /**

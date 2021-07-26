@@ -2919,19 +2919,21 @@ ul.ptabs li > a.is-active {
   color: #666 !important;
   background: #fff;
 }
+
 div.messages {
-  background-position: 8px 8px;
+  background-position: 8px 8px; /* LTR */
   background-repeat: no-repeat;
   border: 1px solid;
-  margin: 18px 0;
-  padding: 20px 10px 20px 40px;
+  margin: 6px 0;
+  padding: 10px 10px 10px 50px; /* LTR */
 }
-
 div.messages--status {
+  background-image: url(../../misc/message-24-ok.png);
   border-color: #be7;
   color: #325e1c;
   background-color: #f3faef;
   border-color: #c9e1bd #c9e1bd #c9e1bd transparent;
+  background-image: url(../../../../misc/icons/73b355/check.svg);
   box-shadow: -8px 0 0 #77b259;
 }
 div.messages--status,
