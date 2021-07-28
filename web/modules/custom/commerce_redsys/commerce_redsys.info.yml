@@ -1,8 +1,0 @@
-name: Commerce Redsys
-description: 'Redsys payment gateway for Commerce Module'
-package: Commerce
-type: module
-core_version_requirement: ^8 || ^9
-core: 8.x
-dependencies:
-  - commerce:commerce_payment
