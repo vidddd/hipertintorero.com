@@ -66,7 +66,6 @@
     return false;
   });
   
-
   loginIcon.on('click', function(){
     if(isOpenUser == false){
       cartBox.removeClass('mini-cart__content-open');
@@ -101,5 +100,37 @@
       $('.imagen'+$(this).attr('rel')).fadeIn(1000);
       e.preventDefault();
   });
+  
+  let cookieButton = $('#submit_button_cookie');
+  let cookiepolicy = $('#cookiepolicy');
+  console.log(getCookie('hipertintorero-cookie'));
+  
+  if(getCookie('hipertintorero-cookie')){
+    cookiepolicy.hide();
+  } 
 
+  cookieButton.on('click', function(){
+      setCookie('hipertintorero-cookie', '1', 100);
+      cookiepolicy.hide();
+  });
+
+  function setCookie(name, value, daysToLive) {
+      var cookie = name + "=" + encodeURIComponent(value);
+      
+      if(typeof daysToLive === "number") {
+          cookie += "; max-age=" + (daysToLive*24*60*60);
+          document.cookie = cookie;
+      }
+  }
+
+  function getCookie(name) {
+      var cookieArr = document.cookie.split(";");
+      for(var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+          if(name == cookiePair[0].trim()) {
+              return decodeURIComponent(cookiePair[1]);
+          }
+      }
+      return null;
+  }
 })(jQuery);
