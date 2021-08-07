@@ -18,7 +18,6 @@
 # Ignore IDE files
 /.idea/
 /.vscode/
-*.iml
 *.code-workspace
 
 # Ignore all log files
@@ -43,3 +42,5 @@ sites/README.txt
 sites/all/modules/README.txt
 sites/all/themes/README.txt
 composer.lock
+
+!/web/libraries/dropzone
