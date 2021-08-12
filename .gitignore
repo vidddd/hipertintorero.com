@@ -8,6 +8,8 @@
 /web/libraries/
 /.vscode/
 
+!/web/libraries/dropzone
+
 # Ignore all site specific data
 /web/sites/default/settings.php
 /web/sites/*
