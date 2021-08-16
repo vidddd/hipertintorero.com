@@ -70,35 +70,28 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes }}>
-{# kpr(content.field_blog_category) #}
-<div class="post post-full-item">
-    <div class="post-thumb">
-        <img src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" alt="" />
-      <div class="entry-meta">
-        <span class="posted-on">
-          <i class="fa fa-clock-o"></i>{{ date }}
-        </span>
-        <span class="categories-links">
-          <i class="fa fa-folder-open-o"></i>
-          <a href="#">{{ content.field_blog_category }}</a>
-        </span>
-        <!-- <span class="comment-counts"> <i class="fa fa-comments"></i> 0 </span> -->
+<article{{ attributes }}>33333333333333333333
+
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
       </div>
-    </div>
-    <div class="entry-header">
-      <h2 class="entry-title">
-              <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    </div>
-    <div class="entry-content">
-        {{ content.body }}
-      <div class="post-share-buttons">
-        <span>Compartir</span>
-        <a title="Compartir en Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url('entity.node.canonical', {'node': node.id}) }}" target="_blank"><i class="fa fa-facebook"></i></a>
-        <a title="Compartir en twitter" href="https://twitter.com/home?status={{ url('entity.node.canonical', {'node': node.id}) }}" target="_blank"><i class="fa fa-twitter"></i></a>
-        <a title="Compartir en google plus" href="https://plus.google.com/share?url={{ url('entity.node.canonical', {'node': node.id}) }}"><i class="fa fa-google-plus"></i></a>
-      </div>
-    </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes }}>
+    {{ content }}
   </div>
+
 </article>
