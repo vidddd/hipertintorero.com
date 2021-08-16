@@ -3338,7 +3338,7 @@ ol li.checkout-progress--step__current {
 #cookiepolicy {
   position: fixed;
   background-color: #f3f3f3;
-  bottom: 0;
+  bottom: 2%;
   width: 58%;
   left: 22%;
   border-top-left-radius: 4px;
@@ -3346,7 +3346,7 @@ ol li.checkout-progress--step__current {
   margin-right: auto;
   margin-left: auto;
   padding: 15px 25px 0 15px;
-  z-index: 100;
+  z-index: 1000;
 }
 
 #cookiepolicy h1 {
