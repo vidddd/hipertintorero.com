@@ -8,7 +8,7 @@
 /web/libraries/
 /.vscode/
 
-!/web/libraries/dropzone
+!/web/libraries/dropzone/
 
 # Ignore all site specific data
 /web/sites/default/settings.php
@@ -44,5 +44,3 @@ sites/README.txt
 sites/all/modules/README.txt
 sites/all/themes/README.txt
 composer.lock
-
-!/web/libraries/dropzone
