@@ -21,3 +21,24 @@ tintorero.config:
     _title: 'Configuracion'
   requirements:
     _permission: 'administer tintorero'
+
+tintorero.tab1:
+  path: '/tintorero/pages/tabs/tab1'
+  defaults:
+    _controller: '\Drupal\tintorero\Controller\TintoreroPagesController::tab1'
+  requirements:
+    _permission: 'access content'
+
+tintorero.tab2:
+  path: '/tintorero/pages/tabs/tab2'
+  defaults:
+    _controller: '\Drupal\tintorero\Controller\TintoreroPagesController::tab2'
+  requirements:
+    _permission: 'access content'
+
+tintorero.tab3:
+  path: '/tintorero/pages/tabs/tab3'
+  defaults:
+    _controller: '\Drupal\tintorero\Controller\TintoreroPagesController::tab3'
+  requirements:
+    _permission: 'access content'

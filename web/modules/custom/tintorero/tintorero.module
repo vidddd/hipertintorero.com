@@ -50,3 +50,11 @@ function tintorero_customize_address($element, $form_state)
 
   return $element;
 }
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function tintorero_toolbar_alter(&$items)
+{
+  $items['administration']['#attached']['library'][] = 'tintorero/tintorero.css';
+}

@@ -1,0 +1,5 @@
+tintorero.css:
+  version: 1.x
+  css:
+    theme:
+    css/tintorero.css: {}

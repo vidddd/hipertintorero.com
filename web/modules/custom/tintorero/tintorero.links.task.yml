@@ -1,0 +1,15 @@
+tintorero.tab1:
+  route_name: tintorero.tab1
+  title: Tab 1
+  base_route: tintorero.tab1
+  weight: 10
+tintorero.tab2:
+  route_name: tintorero.tab2
+  title: Tab 2
+  base_route: tintorero.tab1
+  weight: 20
+tintorero.tab3:
+  route_name: tintorero.tab3
+  title: Tab 3
+  base_route: tintorero.tab1
+  weight: 30

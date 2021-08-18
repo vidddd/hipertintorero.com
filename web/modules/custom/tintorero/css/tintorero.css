@@ -1,0 +1,9 @@
+.toolbar-icon-tintorero-admin {
+  border-color: rebeccapurple !important;
+}
+
+.toolbar-icon-tintorero-admin:before,
+.toolbar-icon-tintorero-admin:active:before,
+.toolbar-icon-tintorero-admin.is-active:before {
+  background-image: url(images/hiper-tintorero.svg);
+}
