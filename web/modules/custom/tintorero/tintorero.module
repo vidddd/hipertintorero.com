@@ -20,11 +20,8 @@ function tintorero_preprocess_commerce_cart_block(&$variables)
 {
   $query = \Drupal::entityQuery('commerce_order')
     ->condition('uid', \Drupal::currentUser()->id())
-    // ...which are carts
     ->condition('cart', 1)
-    // ...last created last
     ->sort('created', 'ASC')
-    // ...get only one
     ->range(0, 1);
 
   // execute this : you get an array of a unique order ids (last cart)

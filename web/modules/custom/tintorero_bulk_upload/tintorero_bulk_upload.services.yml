@@ -1,0 +1,7 @@
+services:
+  tintorero_bulk_upload.subform_manager:
+    class: Drupal\tintorero_bulk_upload\MediaSubFormManager
+    arguments: ['@entity_type.manager', '@tintorero_bulk_upload.media_type_manager', '@token', '@file_system']
+  tintorero_bulk_upload.media_type_manager:
+    class: Drupal\tintorero_bulk_upload\MediaTypeManager
+    arguments: ['@entity_type.manager', '@entity_field.manager']

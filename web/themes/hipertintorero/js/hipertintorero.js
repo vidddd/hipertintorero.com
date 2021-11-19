@@ -100,10 +100,8 @@
       $('.imagen'+$(this).attr('rel')).fadeIn(1000);
       e.preventDefault();
   });
-  
   let cookieButton = $('#submit_button_cookie');
   let cookiepolicy = $('#cookiepolicy');
-  console.log(getCookie('hipertintorero-cookie'));
   
   if(getCookie('hipertintorero-cookie')){
     cookiepolicy.hide();

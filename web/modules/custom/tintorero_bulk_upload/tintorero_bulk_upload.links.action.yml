@@ -1,0 +1,12 @@
+tintorero_bulk_upload.list:
+  title: 'Upload media items in bulk'
+  route_name: tintorero_bulk_upload.list
+  appears_on:
+    - entity.media.collection
+    - view.media_library.page
+
+tintorero_bulk_upload.add:
+  route_name: entity.tintorero_bulk_config.add_form
+  title: 'Add media bulk upload configuration'
+  appears_on:
+    - entity.tintorero_bulk_config.collection

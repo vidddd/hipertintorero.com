@@ -4,19 +4,20 @@ namespace Drupal\tintorero\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
  * Controller routines for page example routes.
  */
-class TintoreroController extends ControllerBase {
+class TintoreroController extends ControllerBase
+{
 
   //use DescriptionTemplateTrait;
 
   /**
    * {@inheritdoc}
    */
-  protected function getModuleName() {
+  protected function getModuleName()
+  {
     return 'tintorero';
   }
 
@@ -30,9 +31,10 @@ class TintoreroController extends ControllerBase {
    * page. The theme system will later render and surround the content with the
    * appropriate blocks, navigation, and styling.
    */
-  public function contacto() {
+  public function contacto()
+  {
     return [
-       '#allowed_tags' => ['iframe','div','i','h4','p',],
+      '#allowed_tags' => ['iframe', 'div', 'i', 'h4', 'p',],
       '#markup' => '<div class="container contact-content">
   <div class="row">
     <div class="col-md-4">
@@ -98,7 +100,8 @@ class TintoreroController extends ControllerBase {
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
    *   If the parameters are invalid.
    */
-  public function arguments($first, $second) {
+  public function arguments($first, $second)
+  {
     // Make sure you don't trust the URL to be safe! Always check for exploits.
     if (!is_numeric($first) || !is_numeric($second)) {
       // We will just show a standard "access denied" page in this case.
@@ -118,5 +121,4 @@ class TintoreroController extends ControllerBase {
     ];
     return $render_array;
   }
-
 }

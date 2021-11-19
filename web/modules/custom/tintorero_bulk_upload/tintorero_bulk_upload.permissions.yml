@@ -1,0 +1,6 @@
+administer tintorero_bulk_upload configuration:
+  title: 'Configure Media Upload form'
+  description: 'Allow to configure the media upload form'
+
+permission_callbacks:
+  - \Drupal\tintorero_bulk_upload\MediaBulkConfigPermissions::mediaBulkConfigPermissions

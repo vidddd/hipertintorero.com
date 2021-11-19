@@ -1,0 +1,7 @@
+name: Tintorero BULK UPLOAD
+description: 'Tintorero Bulk Files Upload module.'
+type: module
+package: 'Tintorero'
+core_version_requirement: ^9
+dependencies:
+  - drupal:media 
