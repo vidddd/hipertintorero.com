@@ -8,3 +8,13 @@ services:
     arguments: ['@request_stack']
     tags:
       - { name: tintorero.oferta_resolver, priority: 600 }
+  tintorero.logger.channel.tintorero:
+    parent: logger.channel_base
+    arguments: ['tintorero']
+    tags:
+      - {name: tintorero}
+  tintorero.logger.mail_logger:
+    class: Drupal\tintorero\Logger\MailLogger
+    arguments: ['@logger.log_message_parser', '@config.factory']
+    tags:
+      - { name: logger }

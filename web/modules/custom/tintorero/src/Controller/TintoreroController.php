@@ -21,15 +21,10 @@ class TintoreroController extends ControllerBase
     return 'tintorero';
   }
 
+
   /**
-   * Constructs a simple page.
+   * Constructs a Contacto Page
    *
-   * The router _controller callback, maps the path
-   * 'examples/page-example/simple' to this method.
-   *
-   * _controller callbacks return a renderable array for the content area of the
-   * page. The theme system will later render and surround the content with the
-   * appropriate blocks, navigation, and styling.
    */
   public function contacto()
   {

@@ -33,21 +33,20 @@ class TintoreroConfiguracionForm extends ConfigFormBase
       '#type'  => 'fieldset',
       '#title' => $this->t('Configuraciones'),
     );
-    $form['configuracion']['saludo'] = array(
+    $form['configuracion']['email_notify'] = array(
       '#type'          => 'textfield',
-      '#title'         => 'saludo',
-      '#default_value' => $config->get('saludo'),
+      '#title'         => 'Email Notificaciones de Error',
+      '#default_value' => $config->get('email_notify'),
     );
     return parent::buildForm($form, $form_state);
   }
-
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
     $this->config('tintorero.configuracion')
-      ->set('saludo', $form_state->getValue('saludo'))
+      ->set('email_notify', $form_state->getValue('email_notify'))
       ->save();
   }
 }

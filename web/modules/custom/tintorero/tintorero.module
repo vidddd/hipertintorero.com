@@ -15,6 +15,20 @@ function tintorero_theme()
     ],
   ];
 }
+/**
+ * Implements hook_mail().
+ */
+function tintorero_mail($key, &$message, $params)
+{
+  switch ($key) {
+    case 'tintorero_log':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'Hay un error en hipertintorero.com';
+      $message['body'][] = $params['message'];
+
+      break;
+  }
+}
 
 function tintorero_preprocess_commerce_cart_block(&$variables)
 {
