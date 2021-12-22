@@ -44,6 +44,7 @@ class MailLogger implements LoggerInterface
             return;
         }
         $to = $this->configFactory->get('tintorero.configuracion')->get('email_notify');
+
         $langcode = $this->configFactory->get('system.site')->get('langcode');
         $variables = $this->parser->parseMessagePlaceholders($message, $context);
         $markup = new FormattableMarkup($message, $variables);

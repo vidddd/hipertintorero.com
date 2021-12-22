@@ -18,3 +18,7 @@ services:
     arguments: ['@logger.log_message_parser', '@config.factory']
     tags:
       - { name: logger }
+  tintorero.subscriber.commerce_redsys_payment:
+    class: Drupal\tintorero\EventSubscriber\CommerceRedsysPaymentSubscriber
+    tags:
+      - { name: event_subscriber } 

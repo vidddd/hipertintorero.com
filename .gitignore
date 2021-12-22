@@ -8,6 +8,7 @@
 /web/libraries/
 /.vscode/
 
+!/web/libraries/dropzone
 
 # Ignore all site specific data
 /web/sites/default/settings.php
@@ -31,6 +32,8 @@ node_modules
 *.css.map
 *.css.map.map
 
+bin
+
 # Ignore default text files
 /CHANGELOG.txt
 /COPYRIGHT.txt
@@ -44,4 +47,4 @@ sites/all/modules/README.txt
 sites/all/themes/README.txt
 composer.lock
 
-!/web/libraries/dropzone/
+!/web/libraries/dropzone
