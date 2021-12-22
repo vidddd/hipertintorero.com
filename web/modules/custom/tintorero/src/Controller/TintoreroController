@@ -1,24 +1,23 @@
 <?php
 
-namespace Drupal\tintorero\Controller;
+namespace Drupal\page_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
  * Controller routines for page example routes.
  */
-class TintoreroController extends ControllerBase
-{
+class PController extends ControllerBase {
 
-  //use DescriptionTemplateTrait;
+  use DescriptionTemplateTrait;
 
   /**
    * {@inheritdoc}
    */
-  protected function getModuleName()
-  {
-    return 'tintorero';
+  protected function getModuleName() {
+    return 'page_example';
   }
 
   /**
@@ -31,45 +30,9 @@ class TintoreroController extends ControllerBase
    * page. The theme system will later render and surround the content with the
    * appropriate blocks, navigation, and styling.
    */
-  public function contacto()
-  {
+  public function simple() {
     return [
-      '#allowed_tags' => ['iframe', 'div', 'i', 'h4', 'p',],
-      '#markup' => '<div class="container contact-content">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="call-us_phone row">
-        <div class="col-xs-2 col-sm-2">
-          <div class="call-us_icon">
-            <i class="fa fa-phone"></i>
-          </div>
-        </div>
-        <div class="col-xs-10 col-sm-10">
-          <div class="phone">
-            <h4> 91 569 52 57 </h4>
-            <p>hola@hipertintorero.com</p>
-          </div>
-        </div>
-      </div>
-      <div class="call-us_address row">
-        <div class="col-xs-2 col-sm-2">
-          <div class="call-us_icon">
-            <i class="fa fa-home"></i>
-          </div>
-        </div>
-        <div class="col-xs-10 col-sm-10">
-          <div class="address">
-            <h4>Santa Saturnina 2</h4>
-            <p>28019 Madrid, Spain</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.3697525676494!2d-3.7210590901659066!3d40.39844496628265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4227c38c55e149%3A0xdf12c3b1d9f148bd!2sHiper+Tintorero!5e0!3m2!1sen!2ses!4v1543579266443" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-  </div>
-</div>',
+      '#markup' => '<p>' . $this->t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>',
     ];
   }
 
@@ -100,8 +63,7 @@ class TintoreroController extends ControllerBase
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
    *   If the parameters are invalid.
    */
-  public function arguments($first, $second)
-  {
+  public function arguments($first, $second) {
     // Make sure you don't trust the URL to be safe! Always check for exploits.
     if (!is_numeric($first) || !is_numeric($second)) {
       // We will just show a standard "access denied" page in this case.
@@ -121,4 +83,5 @@ class TintoreroController extends ControllerBase
     ];
     return $render_array;
   }
+
 }

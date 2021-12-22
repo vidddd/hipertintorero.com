@@ -143,6 +143,7 @@ function hipertintorero_preprocess_menu_local_task(&$vars)
 function hipertintorero_preprocess_commerce_product(array &$vars)
 {
   // para el enlace de enviar por email
+  /*
   $product = $vars['elements']['#commerce_product'];
   $vars['titulo'] = $product->getTitle() . ' - Hiper Tintorero';
 
@@ -153,5 +154,5 @@ function hipertintorero_preprocess_commerce_product(array &$vars)
     $vars['oferta'] = "4444";
   } else {
     $vars['oferta'] = null;
-  }
+  }*/
 }
