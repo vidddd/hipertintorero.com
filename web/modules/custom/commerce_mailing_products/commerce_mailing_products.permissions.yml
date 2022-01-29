@@ -1,0 +1,5 @@
+administer commerce_mailing_products:
+  title: 'Administer commerce_mailing_products settings'
+  restrict access: true
+access commerce_mailing_products overview:
+  title: 'Access commerce_mailing_products overview page'

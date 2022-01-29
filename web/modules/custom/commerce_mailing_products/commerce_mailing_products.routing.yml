@@ -1,0 +1,7 @@
+entity.commerce_mailing_products.settings:
+  path: 'admin/structure/commerce-mailing-products'
+  defaults:
+    _form: '\Drupal\commerce_mailing_products\Form\CommerceMailingProductsSettingsForm'
+    _title: 'commerce_mailing_products'
+  requirements:
+    _permission: 'administer commerce_mailing_products'

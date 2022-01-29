@@ -1,8 +1,8 @@
-name: Commerce Redsys Paymnet
-description: 'Redsys payment gateway for Commerce Module'
-package: Commerce
+name: Commerce Mailing Products
 type: module
-core_version_requirement: ^8 || ^9
-core: 8.x
+description: 'Compose and send newsletter of Drupal Commerce Products.'
+package: Commerce
+core_version_requirement: ^9.2
+configure: commerce_mailing_products.configuration
 dependencies:
-  - commerce:commerce_payment
+  - drupal:commerce

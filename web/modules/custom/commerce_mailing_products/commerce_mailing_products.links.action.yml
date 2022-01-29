@@ -1,0 +1,5 @@
+commerce_mailing_products.add_form:
+  route_name: entity.commerce_mailing_products.add_form
+  title: 'Add commerce_mailing_products'
+  appears_on:
+    - entity.commerce_mailing_products.collection
