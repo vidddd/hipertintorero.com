@@ -23,8 +23,25 @@ interface MailingInterface extends ContentEntityInterface, EntityChangedInterfac
      *
      * @param string $title
      *
-     * @return \Drupal\commerce_mailing_products\Entity\MailingInterface
-     *   The called Mailing entity.
+     * @return $this
      */
     public function setTitle($title);
+
+    /**
+     * Gets the product creation timestamp.
+     *
+     * @return int
+     *   The product creation timestamp.
+     */
+    public function getCreatedTime();
+
+    /**
+     * Sets the product creation timestamp.
+     *
+     * @param int $timestamp
+     *   The product creation timestamp.
+     *
+     * @return $this
+     */
+    public function setCreatedTime($timestamp);
 }

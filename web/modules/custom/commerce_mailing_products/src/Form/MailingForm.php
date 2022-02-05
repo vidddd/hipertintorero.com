@@ -16,7 +16,7 @@ class MailingForm extends ContentEntityForm
    */
   public function save(array $form, FormStateInterface $form_state)
   {
-
+    /*
     $entity = $this->getEntity();
     $result = $entity->save();
     $link = $entity->toLink($this->t('View'))->toRenderable();
@@ -31,7 +31,7 @@ class MailingForm extends ContentEntityForm
       $this->messenger()->addStatus($this->t('The commerce_mailing_products %label has been updated.', $message_arguments));
       $this->logger('commerce_mailing_products')->notice('Updated new commerce_mailing_products %label.', $logger_arguments);
     }
-
     $form_state->setRedirect('entity.commerce_mailing_products.canonical', ['commerce_mailing_products' => $entity->id()]);
+     */
   }
 }
