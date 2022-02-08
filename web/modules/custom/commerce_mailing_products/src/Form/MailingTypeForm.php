@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Mailing type authoring form.
  */
-class MailingTypeEntityForm extends BundleEntityFormBase
+class MailingTypeForm extends BundleEntityFormBase
 {
 
     /**
@@ -38,6 +38,13 @@ class MailingTypeEntityForm extends BundleEntityFormBase
             ],
         ];
 
+        $form['label2'] = [
+            '#title' => $this->t('Label2'),
+            '#type' => 'textfield',
+            //'#default_value' => $mailing_type->label2(),
+            '#description' => $this->t('The Label 2.'),
+            '#required' => TRUE,
+        ];
         return $form;
     }
 }

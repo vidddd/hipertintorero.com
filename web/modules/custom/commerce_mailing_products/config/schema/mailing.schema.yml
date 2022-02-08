@@ -1,0 +1,13 @@
+quiz.type.*:
+  type: config_entity
+  label: 'Mailing type'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    label2:
+      type: label
+      label: 'Label2'

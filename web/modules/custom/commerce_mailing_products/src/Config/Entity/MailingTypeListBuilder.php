@@ -14,7 +14,6 @@ class MailingTypeListBuilder extends ConfigEntityListBuilder
     public function render()
     {
         $build = parent::render();
-        $build['table']['#caption'] = $this->t('Mailing types.');
         return $build;
     }
 
@@ -32,8 +31,7 @@ class MailingTypeListBuilder extends ConfigEntityListBuilder
      */
     public function buildRow(EntityInterface $entity)
     {
-        //$row['type'] = $entity->toLink(NULL, 'edit-form');
-        $row['type'] = '';
+        $row['type'] = $entity->toLink(NULL, 'edit-form');
         return $row + parent::buildRow($entity);
     }
 }

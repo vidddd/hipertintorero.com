@@ -34,7 +34,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *     },
  *     "list_builder" = "Drupal\commerce_mailing_products\Config\Entity\MailingTypeListBuilder",
  *     "form" = {
- *       "default" = "Drupal\commerce_mailing_products\Form\MailingTypeEntityForm",
+ *       "default" = "Drupal\commerce_mailing_products\Form\MailingTypeForm",
  *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
  *     },
  *   },

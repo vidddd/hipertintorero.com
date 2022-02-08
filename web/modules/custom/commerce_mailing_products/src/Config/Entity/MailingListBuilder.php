@@ -1,8 +1,7 @@
 <?php
 
-namespace Drupal\commerce_mailing_products\View;
+namespace Drupal\commerce_mailing_products\Config\Entity;
 
-use Drupal\commerce_product\Entity\ProductType;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Url;
@@ -30,7 +29,8 @@ class MailingListBuilder extends EntityListBuilder
      */
     public function buildRow(EntityInterface $entity)
     {
-
+        echo "2222";
+        die;
         $row['title']['data'] = '';
         /*$row['title']['data'] = [
             '#type' => 'link',
@@ -48,8 +48,8 @@ class MailingListBuilder extends EntityListBuilder
      */
     protected function getDefaultOperations(EntityInterface $entity)
     {
-        /* $operations = parent::getDefaultOperations($entity);
-
+        $operations = parent::getDefaultOperations($entity);
+        /*
         $variations_url = new Url('entity.commerce_product_variation.collection', [
             'commerce_product' => $entity->id(),
         ]);
@@ -65,7 +65,7 @@ class MailingListBuilder extends EntityListBuilder
                 'query' => ['destination' => NULL],
             ];
         }
-
-        return $operations;*/
+        */
+        return $operations;
     }
 }

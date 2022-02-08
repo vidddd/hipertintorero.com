@@ -1,11 +1,11 @@
 entity.commerce_mailing_products.collection:
   title: 'Mailing Products'
-  route_name: commerce_mailing_products.admin.mailings
+  route_name: entity.mailing.collection
   parent: 'commerce.admin_commerce'
   description: 'Manage Commerce Mailing'
 
-#entity.commerce_mailing_type.collection:
-#  title: 'Mailing types'
-#  route_name: entity.commerce_mailing_type.mailings
-#  parent: 'entity.commerce_mailing_products.collection'
-#  description: 'Manage your Mailing types'
+entity.commerce_mailing_products_type.collection:
+  title: 'Mailing types'
+  route_name: entity.mailing_type.collection
+  parent: 'entity.commerce_mailing_products.collection'
+  description: 'Manage your Mailing types'

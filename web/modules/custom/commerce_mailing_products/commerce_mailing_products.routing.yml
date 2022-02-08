@@ -1,7 +1,0 @@
-commerce_mailing_products.admin.mailings:
-  path: '/admin/commerce/mailing-products'
-  defaults:
-    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'Mailing Products'
-  requirements:
-    _permission: 'administer mailing products'

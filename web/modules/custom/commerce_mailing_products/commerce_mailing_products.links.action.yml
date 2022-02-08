@@ -1,5 +1,11 @@
-entity.commerce_mailing_products.add_page:
-  route_name: entity.commerce_mailing_products.add_page
-  title: 'Add Mailing'
+entity.mailing.add:
+  route_name: entity.mailing.add_page
+  title: 'Compose Mailing'
   appears_on:
-    - commerce_mailing_products.admin.mailings
+    - entity.mailing.collection
+
+entity.mailing_type.add:
+  route_name: entity.mailing_type.add_form
+  title: 'Add Mailing Type'
+  appears_on:
+    - entity.mailing_type.collection

@@ -22,6 +22,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
  *     plural = "@count mailings",
  *   ),
  *   base_table = "commerce_mailing_products",
+ *   fieldable = TRUE,
  *   bundle_label = @Translation("Mailing type"),
  *   bundle_entity_type = "mailing_type",
  *   field_ui_base_route = "entity.mailing_type.edit_form",
@@ -35,29 +36,33 @@ use Drupal\Core\Entity\EntityStorageInterface;
  *     "uid" = "uid",
  *   },
  *   handlers = {
- *     "list_builder" = "Drupal\commerce_mailing_products\View\MailingListBuilder",
+ *     "view_builder" = "Drupal\commerce_mailing_products\View\MailingViewBuilder",
+ *     "list_builder" = "Drupal\commerce_mailing_products\Config\Entity\MailingListBuilder",
+ *     "views_data" = "Drupal\entity\EntityViewsData",
+ *     "storage" = "Drupal\commerce_mailing_products\Storage\MailingStorage",
  *     "form" = {
- *       "default" = "Drupal\Core\Entity\ContentEntityForm",
- *       "add" = "Drupal\Core\Entity\ContentEntityForm",
- *       "edit" = "Drupal\Core\Entity\ContentEntityForm",
+ *       "default" = "Drupal\commerce_mailing_products\Form\MailingForm",
+ *       "add" = "Drupal\commerce_mailing_products\Form\MailingForm",
+ *       "edit" = "Drupal\commerce_mailing_products\Form\MailingForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
- *     "views_data" = "Drupal\entity\EntityViewsData",
- *     "storage" = "Drupal\commerce_mailing_products\Storage\MailingStorage"
+ *     "route_provider" = {
+ *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider"
+ *     },
  *   },
  *   links = {
- *     "canonical" = "/commerce-mailing/{mailing}",
- *     "add-page" = "/commerce-mailing/add",
- *     "add-form" = "/commerce-mailing/add/{quiz_type}",
- *     "edit-form" = "/commerce-mailing/{mailing}/edit",
- *     "delete-form" = "/commerce-mailing/{mailing}/delete",
- *     "collection" = "/admin/commerce/mailings",
- *     "take" = "/commerce-mailing/{mailing}/take",
+ *     "canonical" = "/admin/commerce/mailing-products/mailing/{mailing}",
+ *     "add-page" = "/admin/commerce/mailing-products/mailing/add",
+ *     "add-form" = "/admin/commerce/mailing-products/mailing/add/{mailing_type}",
+ *     "edit-form" = "/admin/commerce/mailing-products/mailing/{mailing}/edit",
+ *     "delete-form" = "/admin/commerce/mailing-products/mailing/{mailing}/delete",
+ *     "collection" = "/admin/commerce/mailing-products",
  *   },
  *   admin_permission = "administer mailing products",
  *   translatable = TRUE,
  * )
  */
+
 class Mailing extends ContentEntityBase implements ContentEntityInterface
 {
 
@@ -138,21 +143,35 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
             ->setReadOnly(TRUE);
 
         $fields['title'] = BaseFieldDefinition::create('string')
-            ->setLabel('Title')
-            ->setDescription(t('The title of the newsletter.'))
-            ->setRequired(TRUE);
+            ->setLabel(t('Title'))
+            ->setRequired(TRUE)
+            ->setDisplayConfigurable('form', TRUE)
+            ->setRevisionable(TRUE)
+            ->setSetting('max_length', 255)
+            ->setDisplayOptions('view', [
+                'label' => 'hidden',
+                'type' => 'string',
+                'weight' => -5,
+            ])
+            ->setDisplayOptions('form', [
+                'type' => 'string_textfield',
+                'weight' => -5,
+            ]);
 
-        $fields['body'] = BaseFieldDefinition::create('text')
-            ->setLabel(t('Body'))
-            ->setDescription(t('A body of the Newsletter.'))
-            ->setSettings(array(
-                'default_value' => '',
-            ));
+
+        $fields['body'] = BaseFieldDefinition::create('text_long')
+            ->setLabel(t('Description'))
+            ->setSetting('weight', 0)
+            ->setRequired(TRUE)
+            ->setDisplayConfigurable('form', TRUE)
+            ->setDisplayConfigurable('view', TRUE)
+            ->setDisplayOptions('form', [
+                'type' => 'text_textarea',
+            ]);
 
         $fields['products'] = BaseFieldDefinition::create('entity_reference')
             ->setLabel(t('Products'))
             ->setDescription(t('The  Mailing products.'))
-            ->setRequired(TRUE)
             ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
             ->setSetting('target_type', 'commerce_product')
             ->setSetting('handler', 'default')
@@ -162,13 +181,7 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
             ])
             ->setDisplayConfigurable('form', TRUE)
             ->setDisplayConfigurable('view', TRUE);
-        $fields['number_of_random_questions'] = BaseFieldDefinition::create('integer')
-            ->setRevisionable(TRUE)
-            ->setDisplayConfigurable('form', TRUE)
-            ->setDisplayOptions('form', [
-                'type' => 'number',
-            ])
-            ->setLabel(t('Number of random questions'));
+
         $fields['langcode'] = BaseFieldDefinition::create('language')
             ->setLabel(t('Language'))
             ->setTranslatable(true)
@@ -207,7 +220,7 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
     public function preSave(EntityStorageInterface $storage)
     {
         parent::preSave($storage);
-
+        /*
         foreach (array_keys($this->getTranslationLanguages()) as $langcode) {
             $translation = $this->getTranslation($langcode);
 
@@ -218,5 +231,6 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
                 $translation->setOwnerId(0);
             }
         }
+        */
     }
 }
