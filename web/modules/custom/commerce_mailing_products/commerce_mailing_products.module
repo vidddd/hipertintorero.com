@@ -1,16 +1,12 @@
 <?php
 
-/**
- * @file
- * Provides a commerce_mailing_products entity type.
- */
-
 use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_theme().
  */
-function commerce_mailing_products_theme() {
+function commerce_mailing_products_theme()
+{
   return [
     'commerce_mailing_products' => [
       'render element' => 'elements',
@@ -29,8 +25,9 @@ function commerce_mailing_products_theme() {
  *     fields attached to the entity.
  *   - attributes: HTML attributes for the containing element.
  */
-function template_preprocess_commerce_mailing_products(array &$variables) {
-  foreach (Element::children($variables['elements']) as $key) {
+function template_preprocess_commerce_mailing_products(array &$variables)
+{
+  /*foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
-  }
+  }*/
 }

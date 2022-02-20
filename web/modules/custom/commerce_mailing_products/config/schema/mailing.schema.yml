@@ -1,4 +1,4 @@
-quiz.type.*:
+commerce_mailing_products.type.*:
   type: config_entity
   label: 'Mailing type'
   mapping:
@@ -8,6 +8,9 @@ quiz.type.*:
     label:
       type: label
       label: 'Label'
+    description:
+      type: text
+      label: 'Description'
     label2:
       type: label
       label: 'Label2'

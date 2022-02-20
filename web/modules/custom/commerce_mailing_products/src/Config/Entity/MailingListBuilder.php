@@ -18,7 +18,7 @@ class MailingListBuilder extends EntityListBuilder
     public function buildHeader()
     {
         $header['title'] = $this->t('Title');
-        // $header['type'] = $this->t('Type');
+        $header['type'] = $this->t('Type');
         //$header['status'] = $this->t('Status');
         return $header + parent::buildHeader();
     }
@@ -29,17 +29,14 @@ class MailingListBuilder extends EntityListBuilder
      */
     public function buildRow(EntityInterface $entity)
     {
-        echo "2222";
-        die;
-        $row['title']['data'] = '';
-        /*$row['title']['data'] = [
+        $row['title']['data'] = [
             '#type' => 'link',
             '#title' => $entity->label(),
         ] + $entity->toUrl()->toRenderArray();
-        //$row['type'] = $product_type->label();
-        //$row['status'] = $entity->isPublished() ? $this->t('Published') : $this->t('Unpublished');
-        */
 
+        //$row['status'] = $entity->isPublished() ? $this->t('Published') : $this->t('Unpublished');
+
+        $row['type'] = $entity->bundle();
         return $row + parent::buildRow($entity);
     }
 

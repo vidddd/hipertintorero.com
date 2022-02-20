@@ -1,0 +1,7 @@
+commerce_mailing_products.settings:
+  path: '/admin/commerce/mailing-products/settings'
+  defaults:
+    _form: '\Drupal\commerce_mailing_products\Form\CommerceMailingProductsSettingsForm'
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer simplenews settings'

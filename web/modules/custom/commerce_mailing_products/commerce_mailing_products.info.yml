@@ -1,9 +1,8 @@
 name: commerce_mailing_products
 type: module
-description: 'Provides a commerce_mailing_products entity.'
-package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9
+description: 'Composer and send Emailings for Drupal Commerce.'
+core_version_requirement: ^9.1
 dependencies:
-  - drupal:text
+  - drupal:commerce
+  - drupal:symfony_mailer
 configure: entity.commerce_mailing_products.settings

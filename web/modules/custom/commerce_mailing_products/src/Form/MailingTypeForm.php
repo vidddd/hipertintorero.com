@@ -38,13 +38,28 @@ class MailingTypeForm extends BundleEntityFormBase
             ],
         ];
 
+        $form['description'] = [
+            '#title' => $this->t('Description'),
+            '#type' => 'textarea',
+            '#default_value' => $mailing_type->get('description'),
+        ];
+
         $form['label2'] = [
             '#title' => $this->t('Label2'),
             '#type' => 'textfield',
-            //'#default_value' => $mailing_type->label2(),
+            '#default_value' => $mailing_type->getlabel2(),
             '#description' => $this->t('The Label 2.'),
             '#required' => TRUE,
         ];
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save(array $form, FormStateInterface $form_state)
+    {
+        parent::save($form, $form_state);
+        $form_state->setRedirect('entity.mailing_type.collection');
     }
 }

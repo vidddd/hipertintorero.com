@@ -27,6 +27,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   config_export = {
  *     "id",
  *     "label",
+ *     "description",
  *   },
  *   handlers = {
  *     "route_provider" = {
@@ -42,10 +43,11 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *     "add-form" = "/admin/commerce/mailing-products/mailing-types/add",
  *     "edit-form" = "/admin/commerce/mailing-products/mailing/mailing-types/manage/{mailing_type}",
  *     "delete-form" = "/admin/commerce/mailing-products/mailing-types/manage/{mailing_type}/delete",
- *     "collection" = "/admin/commerce/mailing/mailing/mailing-types"
+ *     "collection" = "/admin/commerce/mailing-products/mailing-types"
  *   }
  * )
  */
+
 class MailingType extends ConfigEntityBundleBase
 {
 }

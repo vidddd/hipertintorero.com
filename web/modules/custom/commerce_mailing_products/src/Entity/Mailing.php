@@ -36,9 +36,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
  *     "uid" = "uid",
  *   },
  *   handlers = {
- *     "view_builder" = "Drupal\commerce_mailing_products\View\MailingViewBuilder",
  *     "list_builder" = "Drupal\commerce_mailing_products\Config\Entity\MailingListBuilder",
- *     "views_data" = "Drupal\entity\EntityViewsData",
  *     "storage" = "Drupal\commerce_mailing_products\Storage\MailingStorage",
  *     "form" = {
  *       "default" = "Drupal\commerce_mailing_products\Form\MailingForm",
