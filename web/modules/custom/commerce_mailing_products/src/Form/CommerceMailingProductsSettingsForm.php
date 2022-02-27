@@ -25,12 +25,13 @@ class CommerceMailingProductsSettingsForm extends ConfigFormBase
             '#collapsible' => FALSE,
             '#description' => $this->t("Default sender address that will only be used for confirmation emails. You can specify sender information for each newsletter separately on the newsletter's settings page."),
         ];
+
         $form['cmp_sender_info']['cmp_from_name'] = [
             '#type' => 'textfield',
             '#title' => $this->t('From name'),
             '#size' => 60,
             '#maxlength' => 128,
-            '#default_value' => $config->get('newsletter.from_name'),
+            '#default_value' => $config->get('cmp.from_name'),
         ];
         $form['cmp_sender_info']['cmp_from_address'] = [
             '#type' => 'email',
@@ -38,7 +39,7 @@ class CommerceMailingProductsSettingsForm extends ConfigFormBase
             '#size' => 60,
             '#maxlength' => 128,
             '#required' => TRUE,
-            '#default_value' => $config->get('newsletter.from_address'),
+            '#default_value' => $config->get('cmp.from_address'),
         ];
 
         $form['cmp_default_options'] = [
@@ -52,18 +53,11 @@ class CommerceMailingProductsSettingsForm extends ConfigFormBase
         $form['cmp_default_options']['cmp_format'] = [
             '#type' => 'select',
             '#title' => $this->t('Format'),
-            '#options' => cmp_format_options(),
+            //'#options' => cmp_format_options(),
             '#description' => $description,
             '#default_value' => $config->get('newsletter.format'),
         ];
-        // @todo Do we need these master defaults for 'priority' and 'receipt'?
-        $form['cmp_default_options']['cmp_priority'] = [
-            '#type' => 'select',
-            '#title' => $this->t('Priority'),
-            '#options' => cmp_get_priority(),
-            '#description' => $this->t('Note that email priority is ignored by a lot of email programs.'),
-            '#default_value' => $config->get('newsletter.priority'),
-        ];
+
         $form['cmp_default_options']['cmp_receipt'] = [
             '#type' => 'checkbox',
             '#title' => $this->t('Request receipt'),
@@ -80,11 +74,11 @@ class CommerceMailingProductsSettingsForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->config('commerce_mailing_products.settings')
-            ->set('newsletter.format', $form_state->getValue('cmp_format'))
+            ->set('cmp.from_name', $form_state->getValue('cmp_from_name'))
+            ->set('cmp.from_address', $form_state->getValue('cmp_from_address'))
             ->set('newsletter.priority', $form_state->getValue('cmp_priority'))
             ->set('newsletter.receipt', $form_state->getValue('cmp_receipt'))
             ->set('newsletter.from_name', $form_state->getValue('cmp_from_name'))
-            ->set('newsletter.from_address', $form_state->getValue('cmp_from_address'))
             ->save();
 
         parent::submitForm($form, $form_state);

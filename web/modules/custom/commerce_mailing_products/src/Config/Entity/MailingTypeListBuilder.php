@@ -24,6 +24,7 @@ class MailingTypeListBuilder extends ConfigEntityListBuilder
     {
         $header['type'] = $this->t('Mailing type');
         $header['label'] = $this->t('Label');
+        $header['send_type'] = $this->t('Send Type');
         return $header + parent::buildHeader();
     }
 
@@ -33,7 +34,8 @@ class MailingTypeListBuilder extends ConfigEntityListBuilder
     public function buildRow(EntityInterface $entity)
     {
         $row['type'] = $entity->toLink(NULL, 'edit-form');
-        $row['label'] = $entity->getLabel2();
+        $row['label'] = '';
+        $row['send_type'] = cmp_get_send_type_label($entity->getSendType());
         return $row + parent::buildRow($entity);
     }
 }

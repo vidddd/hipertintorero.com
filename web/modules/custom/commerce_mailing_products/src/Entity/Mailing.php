@@ -124,7 +124,12 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
         return $this;
     }
 
-    public static function baseFieldDefinitions(EntityTypeInterface $entity_type)
+    public function isSend($timestamp)
+    {
+        $this->set('updated', $timestamp);
+        return $this;
+    }
+        public static function baseFieldDefinitions(EntityTypeInterface $entity_type)
     {
         $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -142,6 +147,7 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
 
         $fields['title'] = BaseFieldDefinition::create('string')
             ->setLabel(t('Title'))
+            ->setDescripcion(t('The title of the mailing, will be used in the Subject of message.'))
             ->setRequired(TRUE)
             ->setDisplayConfigurable('form', TRUE)
             ->setRevisionable(TRUE)
@@ -158,7 +164,7 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
 
 
         $fields['body'] = BaseFieldDefinition::create('text_long')
-            ->setLabel(t('Description'))
+            ->setLabel(t('Body'))
             ->setSetting('weight', 0)
             ->setRequired(TRUE)
             ->setDisplayConfigurable('form', TRUE)
@@ -189,8 +195,8 @@ class Mailing extends ContentEntityBase implements ContentEntityInterface
                 //'weight' => 0,
             ));
 
-        $fields['status'] = BaseFieldDefinition::create('boolean')
-            ->setLabel(t('Status'))
+        $fields['send'] = BaseFieldDefinition::create('boolean')
+            ->setLabel(t('Send'))
             ->setDisplayOptions('form', [
                 'type' => 'boolean_checkbox',
                 'settings' => [

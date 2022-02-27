@@ -19,7 +19,7 @@ entity.commerce_mailing_products_type.collection:
   weight: 2
 
 commerce_mailing_products.settings:
-  title: Settings
+  title: 'Settings'
   route_name: commerce_mailing_products.settings
   parent: 'entity.commerce_mailing_products.collection'
   description: 'Configure Commerce Mailing Products.'

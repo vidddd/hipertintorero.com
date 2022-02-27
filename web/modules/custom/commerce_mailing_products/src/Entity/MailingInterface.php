@@ -5,11 +5,17 @@ namespace Drupal\commerce_mailing_products\Entity;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
 
-/**
- * Represents a Sorteo entity.
- */
 interface MailingInterface extends ContentEntityInterface, EntityChangedInterface
 {
+    /**
+     * Mailing is inactive.
+     */
+    const INACTIVE = 0;
+
+    /**
+     * Mailing is active.
+     */
+    const ACTIVE = 1;
 
     /**
      * Gets the Sorteo title.

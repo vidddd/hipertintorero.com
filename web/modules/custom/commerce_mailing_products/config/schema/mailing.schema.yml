@@ -11,6 +11,6 @@ commerce_mailing_products.type.*:
     description:
       type: text
       label: 'Description'
-    label2:
-      type: label
-      label: 'Label2'
+    send_type:
+      type: integer
+      label: 'Send Type'

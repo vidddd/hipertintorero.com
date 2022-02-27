@@ -10,11 +10,4 @@ use Drupal\Core\Entity\EntityChangedInterface;
  */
 interface MailingTypeInterface extends ContentEntityInterface, EntityChangedInterface
 {
-
-    /**
-     *
-     * @return string
-     */
-    public function getLabel2();
-
 }

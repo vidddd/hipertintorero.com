@@ -19,10 +19,10 @@ class MailingListBuilder extends EntityListBuilder
     {
         $header['title'] = $this->t('Title');
         $header['type'] = $this->t('Type');
+        $header['send'] = $this->t('Send');
         //$header['status'] = $this->t('Status');
         return $header + parent::buildHeader();
     }
-
 
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class MailingListBuilder extends EntityListBuilder
         ] + $entity->toUrl()->toRenderArray();
 
         //$row['status'] = $entity->isPublished() ? $this->t('Published') : $this->t('Unpublished');
-
+        $row['send'] = $entity->isSend() ? $this->t('Send') : $this->t('No Send');
         $row['type'] = $entity->bundle();
         return $row + parent::buildRow($entity);
     }

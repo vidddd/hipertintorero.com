@@ -2,16 +2,38 @@
 
 use Drupal\Core\Render\Element;
 
+
+/**
+ * MAIL PRIORITY.
+ */
+define('CMP_PRIORITY_NONE', 0);
+define('CMP_PRIORITY_HIGHEST', 1);
+define('CMP_PRIORITY_HIGH', 2);
+define('CMP_PRIORITY_NORMAL', 3);
+define('CMP_PRIORITY_LOW', 4);
+define('CMP_PRIORITY_LOWEST', 5);
+
+/**
+ * SEND TYPE
+ */
+define('CMP_SEND_TYPE_NONE', 0);
+define('CMP_SEND_TYPE_PUNCTUAL', 1);
+define('CMP_SEND_TYPE_DIARILY', 2);
+define('CMP_SEND_TYPE_WEEKLY', 3);
+define('CMP_SEND_TYPE_MONTHLY', 4);
+
+
 /**
  * Implements hook_theme().
  */
 function commerce_mailing_products_theme()
 {
+  /*
   return [
     'commerce_mailing_products' => [
       'render element' => 'elements',
     ],
-  ];
+  ];*/
 }
 
 /**
@@ -30,4 +52,54 @@ function template_preprocess_commerce_mailing_products(array &$variables)
   /*foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }*/
+}
+
+
+
+/**
+ * Function to provide the various mail priorities for newsletters.
+ */
+function cmp_get_priority()
+{
+  return [
+    CMP_PRIORITY_NONE => t('- None -'),
+    CMP_PRIORITY_HIGHEST => t('Highest'),
+    CMP_PRIORITY_HIGH => t('High'),
+    CMP_PRIORITY_NORMAL => t('Normal'),
+    CMP_PRIORITY_LOW => t('Low'),
+    CMP_PRIORITY_LOWEST => t('Lowest'),
+  ];
+}
+
+$send_types = [
+  CMP_SEND_TYPE_NONE => t('- None -'),
+  CMP_SEND_TYPE_PUNCTUAL => t('Punctual'),
+  CMP_SEND_TYPE_DIARILY => t('Diarily'),
+  CMP_SEND_TYPE_WEEKLY => t('Weekly'),
+  CMP_SEND_TYPE_MONTHLY => t('Monthly'),
+];
+/**
+ * Function to provide the various mail priorities for newsletters.
+ */
+function cmp_get_send_types()
+{
+  global $send_types;
+  return $send_types;
+}
+function cmp_get_send_type_label($value)
+{
+  global $send_types;
+  return $send_types[$value];
+}
+
+
+/**
+ * Returns simplenews format options.
+ */
+function cmp_format_options()
+{
+  return [
+    'plain' => t('Plain'),
+    'html' => t('HTML'),
+  ];
 }
